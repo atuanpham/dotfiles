@@ -168,3 +168,11 @@ nnoremap <space>y :split<cr>:<C-u>Unite history/yank<cr>
 " type & to search the word in all files in the current dir
 nmap & :Ag <c-r>=expand("<cword>")<cr><cr>
 nnoremap <space>/ :Ag
+
+" --- Auto closing brackets
+ino " ""<left>
+ino ' ''<left>
+ino ( ()<left>
+ino [ []<left>
+ino { {}<left>
+ino {<CR> {<CR>}<ESC>O

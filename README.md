@@ -13,3 +13,5 @@ Run setup script:
 ```
 bash setup
 ```
+
+Thanks [Thoughtbot's dotfiles](https://github.com/thoughtbot/dotfiles)

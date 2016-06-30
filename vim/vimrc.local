@@ -1,3 +1,6 @@
+" highlight current line
+set cursorline
+
 " Press double ESC to clear search highlighting
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[

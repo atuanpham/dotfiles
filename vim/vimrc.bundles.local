@@ -1,6 +1,4 @@
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/unite.vim'
 Plug 'rking/ag.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'

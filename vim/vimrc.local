@@ -5,24 +5,6 @@ set cursorline
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
-" --- Unite configs ---
-let g:unite_source_history_yank_enable = 1
-try
-    let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-catch
-endtry
-" search a file in the filetree
-nnoremap <space><space> :no-split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
-nnoremap <space>f :no-split<cr> :<C-u>Unite file<cr>
-nnoremap <space>g :no-split<cr> :<C-u>Unite -start-insert file_rec/git<cr>
-" make a grep on all files!
-nnoremap <space>/ :split<cr> :<C-u>Unite grep:.<cr>
-" see the yank history
-nnoremap <space>y :split<cr>:<C-u>Unite history/yank<cr>
-" reset not it is <C-l> normally
-:nnoremap <space>r <Plug>(unite_restart)
-
 " --- AG configs ---
 " type & to search the word in all files in the current dir
 nmap & :Ag <c-r>=expand("<cword>")<cr><cr>

@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# ==============================================================================
+# DEFINE CONSTANTS
+# ==============================================================================
+
+# Check OS
+if [[ -e /etc/debian_version ]]; then
+    OS=debian
+    PACKAGE_MANAGER_NAME=apt-get
+elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+    OS=centos
+    PACKAGE_MANAGER_NAME=yum
+else
+    echo "You aren't running this script on a Debian, Ubuntu or Centos system."
+    exit 1
+fi
+
+ROOT_PATH=`dirname "$BASH_SOURCE"`/..
+HOME_DIR=/home/$USER
+
+
+# ==============================================================================
+# INSTALL ESSENTIAL THINGS
+# ==============================================================================
+
+# install anaconda
+echo "Downloading Anaconda..."
+wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-4.0.0-Linux-x86_64.sh
+# wait
+echo "Installing Anaconda..."
+bash ~/Downloads/Anaconda2-4.0.0-Linux-x86_64.sh
+
+# Install Powerline
+echo "Installing Powerline..."
+pip install powerline-status
+echo "Powerline has been installed."
+
+# Install NeoVim
+echo "Adding repository for installing NeoVim"
+if [[ "$OS" -eq "Debian" ]]; then
+    sudo apt-get install software-properties-common
+    sudo add-apt-repository ppa:neovim-ppa/unstable
+    sudo apt-get update
+else
+    sudo yum -y install epel-release
+    sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
+fi
+echo "Installing NeoVim"
+sudo $PACKAGE_MANAGER_NAME install -y neovim
+
+# Install AG
+echo "Installing AG"
+if [[ "$OS" -eq "Debian" ]]; then
+    sudo apt-get install the_silver_searcher_ag
+else
+    sudo yum install the_silver_searcher
+fi
+
+
+# ==============================================================================
+# CONFIGS
+# ==============================================================================
+
+# Download fonts for powerline
+echo "Downloading additional fonts..."
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
+# Create fonts directory
+if [[ ! -d "$HOME_DIR/.fonts" ]]; then
+	mkdir ~/.fonts
+	echo "Created fonts directory."
+fi
+
+if [[ ! -d "$HOME_DIR/.config/fontconfig/conf.d" ]]; then
+	mkdir -p ~/.config/fontconfig/conf.d
+	echo "Created font config directory."
+fi
+
+# Move font to fonts directory
+mv -f PowerlineSymbols.otf ~/.fonts/
+echo "Moved font to fonts directory"
+
+# Update font cache
+fc-cache -vf ~/.fonts/
+echo "Updated font cache"
+
+# Install fontconfig
+mv -f 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+echo "Installed fontconfig"
+
+# Add to .bashrc
+REPOSITORY_ROOT=`pip show powerline-status | grep Location | sed 's/\Location: //g'`
+echo "export REPOSITORY_ROOT=$REPOSITORY_ROOT" >> ~/.bashrc
+echo "powerline-daemon -q" >> ~/.bashrc
+echo "POWERLINE_BASH_CONTINUATION=1" >> ~/.bashrc
+echo "POWERLINE_BASH_SELECT=1" >> ~/.bashrc
+echo ". $REPOSITORY_ROOT/powerline/bindings/bash/powerline.sh" >> ~/.bashrc
+. ~/.bashrc
+echo "Updated bashrc file."
+
+
+# Config neovim
+cp $ROOT_PATH/vim/vimrc ~/.vimrc
+cp $ROOT_PATH/vim/vimrc.bundles ~/.vimrc.bundles
+cp $ROOT_PATH/vim/vimrc.local ~/.vimrc.local
+cp $ROOT_PATH/vim/vimrc.bundles.local ~/.vimrc.bundles.local
+mkdir ~/.vim
+ln -sf ~/.config/nvim ~/.vim
+ln -sf ~/.config/nvim/init.vim ~/.vimrc

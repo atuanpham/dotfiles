@@ -5,3 +5,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
 Plug 'Valloric/YouCompleteMe'
+
+Plug 'vim-scripts/indentpython.vim'
+Plug 'nvie/vim-flake8'
+

@@ -36,19 +36,6 @@ echo "Installing Powerline..."
 pip install powerline-status
 echo "Powerline has been installed."
 
-# Install NeoVim
-echo "Adding repository for installing NeoVim"
-if [[ "$OS" -eq "Debian" ]]; then
-    sudo apt-get install software-properties-common
-    sudo add-apt-repository ppa:neovim-ppa/unstable
-    sudo apt-get update
-else
-    sudo yum -y install epel-release
-    sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
-fi
-echo "Installing NeoVim"
-sudo $PACKAGE_MANAGER_NAME install -y neovim
-
 # Install AG
 echo "Installing AG"
 if [[ "$OS" -eq "Debian" ]]; then
@@ -101,11 +88,9 @@ echo ". $REPOSITORY_ROOT/powerline/bindings/bash/powerline.sh" >> ~/.bashrc
 echo "Updated bashrc file."
 
 
-# Config neovim
+# Config vim
 cp $ROOT_PATH/vim/vimrc ~/.vimrc
 cp $ROOT_PATH/vim/vimrc.bundles ~/.vimrc.bundles
 cp $ROOT_PATH/vim/vimrc.local ~/.vimrc.local
 cp $ROOT_PATH/vim/vimrc.bundles.local ~/.vimrc.bundles.local
 mkdir ~/.vim
-ln -sf ~/.config/nvim ~/.vim
-ln -sf ~/.config/nvim/init.vim ~/.vimrc

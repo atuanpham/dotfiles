@@ -1,3 +1,5 @@
+set t_Co=256
+
 " Leader
 let mapleader = " "
 
@@ -50,9 +52,20 @@ augroup END
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
 
-" Softtabs, 2 spaces
-set tabstop=4
-set shiftwidth=4
+" Softtabs, spaces
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set autoindent
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.rb, *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
 set shiftround
 set expandtab
 

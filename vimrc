@@ -106,8 +106,6 @@ set history=50
 set ruler
 
 " Display status line
-
-" Display status line
 set laststatus=2
 
 " Highlight current line

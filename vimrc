@@ -11,6 +11,7 @@ Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 
 " Use AG for searching
+" NOTE: Have to install AG first: https://github.com/ggreer/the_silver_searcher
 Plug 'rking/ag.vim'
 
 " Search for selected text in file
@@ -29,6 +30,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Automatically insert brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
+
+" File navigation
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
@@ -137,16 +141,17 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Keys for working with tabs
-map <C-1> 1gt
-map <C-2> 2gt
-map <C-3> 3gt
-map <C-4> 4gt
-map <C-5> 5gt
-map <C-6> 6gt
-map <C-7> 7gt
-map <C-8> 8gt
-map <C-9> 9gt
-map <C-0> :tablast<CR>
+map <leader>1 1gt
+map <leader>2 2gt
+map <leader>3 3gt
+map <leader>4 4gt
+map <leader>5 5gt
+map <leader>6 6gt
+map <leader>7 7gt
+map <leader>8 8gt
+map <leader>9 9gt
+map <leader>0 :tablast<CR>
+map <leader>q :tabclose<CR>
 
 " Make it as easy as possible to open vimrc file
 nmap <leader>v :tabedit $MYVIMRC<CR>
@@ -180,8 +185,7 @@ set background=dark
 colorscheme PaperColor
 
 " Airline configs
-" Install Powerline fonts at:
-"       https://github.com/powerline/fonts
+" NOTE: Install Powerline fonts at: https://github.com/powerline/fonts
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='PaperColor'
 let g:airline_powerline_fonts = 1
@@ -190,4 +194,20 @@ let g:airline_powerline_fonts = 1
 nnoremap <silent> <Plug>TransposeCharacters xp
 	\:call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap cp <Plug>TransposeCharacters
+
+" Use AG for searching
+if executable("ag")
+    " Use Ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " CtrlP + Ag
+    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
+
+    let g:ctrlp_use_caching = 0
+
+    if !exists(":Ag")
+        command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+        nnoremap \ :Ag<SPACE>
+    endif
+endif
 

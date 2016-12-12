@@ -34,6 +34,12 @@ Plug 'jiangmiao/auto-pairs'
 " File navigation
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Using <Tab> in VIM
+Plug 'ervandew/supertab'
+
+" Code folding
+Plug 'tmhedberg/SimpylFold'
+
 call plug#end()
 
 
@@ -66,10 +72,10 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
-if has("autocmd")
-    " Enable filetype detection
-    filetype on
+filetype plugin indent on
+syntax on
 
+if has("autocmd")
     " Makefiles require indentation with tabs
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
 
@@ -114,6 +120,13 @@ set cursorline
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
+
+" Allow to remove non-empty directory
+let g:netrw_localrmdir='rm -r'
+
+" Always loaded with opened folds
+set foldmethod=indent
+set foldlevel=20
 
 
 " ==============================================================================
@@ -173,6 +186,9 @@ endif
 " Clear highlighting
 nnoremap <CR> :noh<CR>
 
+" Toggle folding with <Space>
+nnoremap <space> za
+
 
 " ==============================================================================
 " PLUGIN CONFIGS
@@ -211,3 +227,5 @@ if executable("ag")
     endif
 endif
 
+" SympylFold configs
+let g:SimpylFold_docstring_preview = 1

@@ -14,7 +14,7 @@ Plug 'tpope/vim-fugitive'
 " NOTE: Have to install AG first: https://github.com/ggreer/the_silver_searcher
 Plug 'rking/ag.vim'
 
-" Search for selected text in file
+" Search for selected text in file using * or #
 Plug 'nelstrom/vim-visual-star-search'
 
 " Extend repeating feature of VIM
@@ -185,6 +185,8 @@ colorscheme PaperColor
 " Airline configs
 " NOTE: Install Powerline fonts at: https://github.com/powerline/fonts
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tabs = 1
 let g:airline_theme='PaperColor'
 let g:airline_powerline_fonts = 1
 

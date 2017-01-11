@@ -23,6 +23,7 @@ Plug 'tpope/vim-repeat'
 " Color schemes
 Plug 'sjl/badwolf'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'notpratheek/vim-luna'
 
 " Statusline
 Plug 'vim-airline/vim-airline'
@@ -203,14 +204,14 @@ map =j :%!python -m json.tool<CR>
 
 " Color scheme settings
 set background=dark
-colorscheme PaperColor
+colorscheme luna-term
 
 " Airline configs
 " NOTE: Install Powerline fonts at: https://github.com/powerline/fonts
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tabs = 1
-let g:airline_theme='papercolor'
+let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
 
 " Construct mapping for repeating

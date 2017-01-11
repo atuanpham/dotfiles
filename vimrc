@@ -35,10 +35,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Using <Tab> in VIM
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 
 " Code folding
 Plug 'tmhedberg/SimpylFold'
+
+" Code completion
+" Plug 'davidhalter/jedi-vim'
+Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 
@@ -189,6 +193,9 @@ nnoremap <CR> :noh<CR>
 " Toggle folding with <Space>
 nnoremap <space> za
 
+" Format JSON
+map =j :%!python -m json.tool<CR>
+
 
 " ==============================================================================
 " PLUGIN CONFIGS
@@ -203,7 +210,7 @@ colorscheme PaperColor
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tabs = 1
-let g:airline_theme='PaperColor'
+let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 
 " Construct mapping for repeating
@@ -229,3 +236,11 @@ endif
 
 " SympylFold configs
 let g:SimpylFold_docstring_preview = 1
+
+" Jedi configs
+" Use tabs when going to definitions
+" let g:jedi#use_tabs_not_buffers = 1
+
+" YouCompleteMe configs
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_min_num_of_chars_for_completion = 0

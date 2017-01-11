@@ -1,4 +1,5 @@
 export PROMPT="%~ %# "
+export PATH=$PATH:/usr/local/go/bin
 
 if [ "$COLORTERM" = "gnome-terminal" ]; then
     export TERM=xterm-256color

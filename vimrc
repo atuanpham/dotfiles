@@ -59,7 +59,7 @@ set encoding=utf-8
 set t_Co=256
 
 " Customize invisible characters and show invisible chars
-set list listchars=tab:»·,trail:·,nbsp:·
+set list listchars=tab:»·,trail:·,nbsp:·,space:·,precedes:<,extends:>
 
 " Set avoid splitting word across two line
 set linebreak
@@ -205,6 +205,9 @@ map =j :%!python -m json.tool<CR>
 " Color scheme settings
 set background=dark
 colorscheme luna-term
+
+hi Whitespace ctermfg=238
+match Whitespace /\s/
 
 " Airline configs
 " NOTE: Install Powerline fonts at: https://github.com/powerline/fonts

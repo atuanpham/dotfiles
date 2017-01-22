@@ -24,6 +24,8 @@ Plug 'tpope/vim-repeat'
 Plug 'sjl/badwolf'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'notpratheek/vim-luna'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
 
 " Statusline
 Plug 'vim-airline/vim-airline'
@@ -59,7 +61,7 @@ set encoding=utf-8
 set t_Co=256
 
 " Customize invisible characters and show invisible chars
-set list listchars=tab:»·,trail:·,nbsp:·,space:·,precedes:<,extends:>
+set list listchars=tab:»·,trail:·,nbsp:·,space:·
 
 " Set avoid splitting word across two line
 set linebreak
@@ -204,9 +206,8 @@ map =j :%!python -m json.tool<CR>
 
 " Color scheme settings
 set background=dark
-colorscheme luna-term
-
-hi Whitespace ctermfg=238
+colorscheme PaperColor
+hi Whitespace ctermfg=236
 match Whitespace /\s/
 
 " Airline configs
@@ -214,12 +215,12 @@ match Whitespace /\s/
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tabs = 1
-let g:airline_theme='luna'
+let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 
 " Construct mapping for repeating
 nnoremap <silent> <Plug>TransposeCharacters xp
-	\:call repeat#set("\<Plug>TransposeCharacters")<CR>
+    \:call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap cp <Plug>TransposeCharacters
 
 " Use AG for searching

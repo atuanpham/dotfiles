@@ -87,7 +87,10 @@ if has("autocmd")
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
 
     " Another customizations
-    autocmd BufNewFile,BufRead *.html, *.css, *.js setlocal ts=2 sts=2 sw=2 expandtab
+    " autocmd BufNewFile,BufRead *.html, *.css, *.js setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType js setlocal ts=2 sts=2 sw=2 expandtab
 
     " Source vimrc file after saving it
     autocmd bufwritepost .vimrc source $MYVIMRC

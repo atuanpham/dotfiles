@@ -47,6 +47,9 @@ Plug 'tmhedberg/SimpylFold'
 " Plug 'davidhalter/jedi-vim'
 Plug 'Valloric/YouCompleteMe'
 
+" Structure overview
+Plug 'majutsushi/tagbar'
+
 call plug#end()
 
 
@@ -201,6 +204,9 @@ nnoremap <space> za
 
 " Format JSON
 map =j :%!python -m json.tool<CR>
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
 
 
 " ==============================================================================

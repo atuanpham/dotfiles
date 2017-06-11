@@ -50,6 +50,14 @@ Plug 'Valloric/YouCompleteMe'
 " Structure overview
 Plug 'majutsushi/tagbar'
 
+" === Python section ===
+
+" Python indentation
+Plug 'Vimjas/vim-python-pep8-indent'
+
+" === End Python section ===
+
+
 call plug#end()
 
 
@@ -215,7 +223,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " Color scheme settings
 set background=dark
-colorscheme PaperColor
+colorscheme gruvbox
 hi Whitespace ctermfg=236
 match Whitespace /\s/
 
@@ -224,7 +232,7 @@ match Whitespace /\s/
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tabs = 1
-let g:airline_theme='papercolor'
+let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 
 " Construct mapping for repeating

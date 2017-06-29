@@ -57,6 +57,9 @@ Plug 'Vimjas/vim-python-pep8-indent'
 
 " === End Python section ===
 
+" === Jinja section ===
+Plug 'lepture/vim-jinja'
+" === End Jinja secion ===
 
 call plug#end()
 
@@ -222,9 +225,10 @@ nmap <F8> :TagbarToggle<CR>
 " ==============================================================================
 
 " Color scheme settings
-set background=dark
+" set background=dark
 colorscheme gruvbox
-hi Whitespace ctermfg=236
+let g:gruvbox_contrast_dark = 2
+hi Whitespace ctermfg=238
 match Whitespace /\s/
 
 " Airline configs
@@ -266,3 +270,4 @@ let g:SimpylFold_docstring_preview = 1
 " YouCompleteMe configs
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 0
+let g:ycm_python_binary_path = 'python' " Autocomplete regardless of virtualenv

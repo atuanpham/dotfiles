@@ -219,6 +219,9 @@ map =j :%!python -m json.tool<CR>
 " tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" YouCompleteMe
+nmap <leader>g :YcmCompleter GoTo<CR>
+
 
 " ==============================================================================
 " PLUGIN CONFIGS
@@ -271,3 +274,4 @@ let g:SimpylFold_docstring_preview = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_python_binary_path = 'python' " Autocomplete regardless of virtualenv
+let g:ycm_goto_buffer_command = 'new-or-existing-tab'

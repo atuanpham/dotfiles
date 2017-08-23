@@ -75,7 +75,7 @@ set encoding=utf-8
 set t_Co=256
 
 " Customize invisible characters and show invisible chars
-set list listchars=tab:»·,trail:·,nbsp:·,space:·
+set listchars=tab:»·,trail:·,nbsp:·,space:·
 
 " Set avoid splitting word across two line
 set linebreak
@@ -84,7 +84,7 @@ set linebreak
 set number
 
 " Width of a line
-set textwidth=80
+set textwidth=120
 set colorcolumn=+1
 
 " Set width of tab and expand tabs into space

@@ -40,6 +40,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Using <Tab> in VIM
 " Plug 'ervandew/supertab'
 
+" Closing html tags automatically
+Plug 'alvan/vim-closetag'
+
 " Code folding
 Plug 'tmhedberg/SimpylFold'
 
@@ -106,6 +109,9 @@ if has("autocmd")
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
+
+    " Use with Jinja
+    au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 
     " Source vimrc file after saving it
     autocmd bufwritepost .vimrc source $MYVIMRC
@@ -276,3 +282,27 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_python_binary_path = 'python' " Autocomplete regardless of virtualenv
 let g:ycm_goto_buffer_command = 'new-or-existing-tab'
+
+" Vim-Closetag plugin
+" filenames like *.xml, *.html, *.xhtml, ...
+" Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non closing tags self closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" integer value [0|1]
+" This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is '<leader>>'
+"
+let g:closetag_close_shortcut = '<leader>>'

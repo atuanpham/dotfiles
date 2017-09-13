@@ -111,7 +111,7 @@ if has("autocmd")
     autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 
     " Use with Jinja
-    au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
+    au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja ts=2 sts=2 sw=2 expandtab
 
     " Source vimrc file after saving it
     autocmd bufwritepost .vimrc source $MYVIMRC

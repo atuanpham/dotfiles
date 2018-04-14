@@ -4,6 +4,15 @@
 
 call plug#begin('~/.vim/bundle')
 
+" Tree explorer
+Plug 'scrooloose/nerdtree'
+
+" Commenting
+Plug 'tpope/vim-commentary'
+
+" Displaying indent levels
+Plug 'nathanaelkane/vim-indent-guides'
+
 " Aligning text
 Plug 'godlygeek/tabular'
 
@@ -26,10 +35,12 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'notpratheek/vim-luna'
 Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
+Plug 'chriskempson/base16-vim'
 
 " Statusline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 " Automatically insert brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
@@ -159,6 +170,10 @@ let g:netrw_localrmdir='rm -r'
 set foldmethod=indent
 set foldlevel=20
 
+" Gui font
+set guifont=Menlo\ for\ Powerline:h11
+set linespace=3
+
 
 " ==============================================================================
 " SHORTCUTS
@@ -235,19 +250,22 @@ nmap <leader>g :YcmCompleter GoTo<CR>
 " ==============================================================================
 
 " Color scheme settings
-" set background=dark
+set background=dark
 colorscheme gruvbox
-let g:gruvbox_contrast_dark = 2
-hi Whitespace ctermfg=238
-match Whitespace /\s/
 
 " Airline configs
 " NOTE: Install Powerline fonts at: https://github.com/powerline/fonts
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline_theme='gruvbox'
-let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#show_tabs = 1
+" let g:airline_theme='badwolf'
+" let g:airline_powerline_fonts = 1
+
+" Lightline configs
+" Please copy gruvbox.vim to colorscheme of lightline
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ }
 
 " Construct mapping for repeating
 nnoremap <silent> <Plug>TransposeCharacters xp
@@ -306,3 +324,22 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is '<leader>>'
 "
 let g:closetag_close_shortcut = '<leader>>'
+
+" NERDTree configs
+" - Open automatically when Vim starts up
+autocmd vimenter * NERDTree
+" - Open automatically when Vim starts up if no file were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" - Open automatically when Vim starts up on opening a dir
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0]
+            \ | wincmd p| ene | endif
+" - Shortcut to open NERDTree (Ctrl + n)
+map <C-n> :NERDTreeToggle<CR>
+" - Closing Vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" VIM indent guides
+"
+let g:indent_guides_guide_size = 1

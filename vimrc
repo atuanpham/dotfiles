@@ -98,7 +98,7 @@ set linebreak
 set number
 
 " Width of a line
-set textwidth=120
+set textwidth=80
 set colorcolumn=+1
 
 " Set width of tab and expand tabs into space
@@ -252,6 +252,9 @@ nmap <leader>g :YcmCompleter GoTo<CR>
 " Color scheme settings
 set background=dark
 colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_bold = 0
+let g:gruvbox_italic = 1
 
 " Airline configs
 " NOTE: Install Powerline fonts at: https://github.com/powerline/fonts

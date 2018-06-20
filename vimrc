@@ -98,7 +98,7 @@ set linebreak
 set number
 
 " Width of a line
-set textwidth=80
+set textwidth=110
 set colorcolumn=+1
 
 " Set width of tab and expand tabs into space
@@ -174,6 +174,9 @@ set foldlevel=20
 set guifont=Menlo\ for\ Powerline:h11
 set linespace=3
 
+" For C/C++, custom build command
+set makeprg=make\ -C\ ./build\ -j9
+
 
 " ==============================================================================
 " SHORTCUTS
@@ -244,6 +247,10 @@ nmap <F8> :TagbarToggle<CR>
 " YouCompleteMe
 nmap <leader>g :YcmCompleter GoTo<CR>
 
+" For C/C++
+nnoremap <F4> :!g++ %:p -o %:p:r<cr>
+nnoremap <F5> :!%:p:r<cr>
+
 
 " ==============================================================================
 " PLUGIN CONFIGS
@@ -303,6 +310,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_python_binary_path = 'python' " Autocomplete regardless of virtualenv
 let g:ycm_goto_buffer_command = 'new-or-existing-tab'
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " Vim-Closetag plugin
 " filenames like *.xml, *.html, *.xhtml, ...

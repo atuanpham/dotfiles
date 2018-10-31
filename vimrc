@@ -36,6 +36,11 @@ Plug 'notpratheek/vim-luna'
 Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'andreasvc/vim-256noir'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'fxn/vim-monochrome'
+Plug 'reedes/vim-colors-pencil'
+Plug 'vim-scripts/turbo.vim'
 
 " Statusline
 " Plug 'vim-airline/vim-airline'
@@ -171,7 +176,8 @@ set foldmethod=indent
 set foldlevel=20
 
 " Gui font
-set guifont=Menlo\ for\ Powerline:h11
+" set guifont=Menlo\ for\ Powerline:h11
+set guifont=Cousine:h11
 set linespace=3
 
 " For C/C++, custom build command
@@ -251,6 +257,8 @@ nmap <leader>g :YcmCompleter GoTo<CR>
 nnoremap <F4> :!g++ %:p -o %:p:r<cr>
 nnoremap <F5> :!%:p:r<cr>
 
+" Using command line in VIM
+nnoremap ! :!
 
 " ==============================================================================
 " PLUGIN CONFIGS
@@ -258,10 +266,16 @@ nnoremap <F5> :!%:p:r<cr>
 
 " Color scheme settings
 set background=dark
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_bold = 0
-let g:gruvbox_italic = 1
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_bold = 0
+" let g:gruvbox_italic = 1
+
+colorscheme pencil
+
+" Scheme pencil
+let g:pencil_higher_contrast_ui = 1
+let g:pencil_neutral_code_bg = 1
 
 " Airline configs
 " NOTE: Install Powerline fonts at: https://github.com/powerline/fonts
@@ -273,9 +287,9 @@ let g:gruvbox_italic = 1
 
 " Lightline configs
 " Please copy gruvbox.vim to colorscheme of lightline
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'gruvbox',
+"       \ }
 
 " Construct mapping for repeating
 nnoremap <silent> <Plug>TransposeCharacters xp
@@ -337,6 +351,8 @@ let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
 " NERDTree configs
+" Hide scrollbar in NERDTree
+set guioptions-=L
 " - Open automatically when Vim starts up
 autocmd vimenter * NERDTree
 " - Open automatically when Vim starts up if no file were specified

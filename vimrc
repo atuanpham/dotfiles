@@ -94,7 +94,9 @@ set encoding=utf-8
 set t_Co=256
 
 " Customize invisible characters and show invisible chars
-set listchars=tab:»·,trail:·,nbsp:·,space:·
+set showbreak=↪\ 
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨,space:·
+set list
 
 " Set avoid splitting word across two line
 set linebreak
@@ -123,7 +125,7 @@ if has("autocmd")
     " autocmd BufNewFile,BufRead *.html, *.css, *.js setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 
     " Use with Jinja
@@ -177,7 +179,7 @@ set foldlevel=20
 
 " Gui font
 " set guifont=Menlo\ for\ Powerline:h11
-set guifont=Cousine:h11
+set guifont=Hack:h11
 set linespace=3
 
 " For C/C++, custom build command
@@ -266,16 +268,16 @@ nnoremap ! :!
 
 " Color scheme settings
 set background=dark
-" colorscheme gruvbox
-" let g:gruvbox_contrast_dark = 'hard'
-" let g:gruvbox_bold = 0
-" let g:gruvbox_italic = 1
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_bold = 0
+let g:gruvbox_italic = 1
 
-colorscheme pencil
+" colorscheme pencil
 
 " Scheme pencil
-let g:pencil_higher_contrast_ui = 1
-let g:pencil_neutral_code_bg = 1
+" let g:pencil_higher_contrast_ui = 1
+" let g:pencil_neutral_code_bg = 1
 
 " Airline configs
 " NOTE: Install Powerline fonts at: https://github.com/powerline/fonts
@@ -287,9 +289,9 @@ let g:pencil_neutral_code_bg = 1
 
 " Lightline configs
 " Please copy gruvbox.vim to colorscheme of lightline
-" let g:lightline = {
-"       \ 'colorscheme': 'gruvbox',
-"       \ }
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ }
 
 " Construct mapping for repeating
 nnoremap <silent> <Plug>TransposeCharacters xp
@@ -322,9 +324,16 @@ let g:SimpylFold_docstring_preview = 1
 " YouCompleteMe configs
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 0
-let g:ycm_python_binary_path = 'python' " Autocomplete regardless of virtualenv
 let g:ycm_goto_buffer_command = 'new-or-existing-tab'
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+" For working with virtual env
+let g:ycm_python_interpreter_path = ''
+let g:ycm_python_sys_path = []
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/.ycm_extra_conf.py'
 
 " Vim-Closetag plugin
 " filenames like *.xml, *.html, *.xhtml, ...

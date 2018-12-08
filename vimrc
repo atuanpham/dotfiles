@@ -66,6 +66,9 @@ Plug 'tmhedberg/SimpylFold'
 " Plug 'davidhalter/jedi-vim'
 Plug 'Valloric/YouCompleteMe'
 
+" Syntax & style checking
+Plug 'nvie/vim-flake8'
+
 " Structure overview
 Plug 'majutsushi/tagbar'
 
@@ -95,7 +98,7 @@ set t_Co=256
 
 " Customize invisible characters and show invisible chars
 set showbreak=↪\ 
-set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨,space:·
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set list
 
 " Set avoid splitting word across two line
@@ -105,7 +108,7 @@ set linebreak
 set number
 
 " Width of a line
-set textwidth=110
+set textwidth=120
 set colorcolumn=+1
 
 " Set width of tab and expand tabs into space
@@ -133,6 +136,9 @@ if has("autocmd")
 
     " Source vimrc file after saving it
     autocmd bufwritepost .vimrc source $MYVIMRC
+
+    " Flake8 checking automatically when writing a python file
+    autocmd BufWritePost *.py call Flake8()
 endif
 
 " Enable highlighting
@@ -241,7 +247,8 @@ if exists(":Tabularize")
 endif
 
 " Clear highlighting
-nnoremap <CR> :noh<CR>
+" nnoremap <CR> :noh<CR>
+nnoremap <ESC> :noh<CR>
 
 " Toggle folding with <Space>
 nnoremap <space> za
@@ -265,6 +272,12 @@ nnoremap ! :!
 " ==============================================================================
 " PLUGIN CONFIGS
 " ==============================================================================
+
+" Flake* Configs
+" Show signs in the gutter
+let g:flake8_show_in_gutter=1
+" Show marks in the file
+let g:flake8_show_in_file=1
 
 " Color scheme settings
 set background=dark
@@ -292,6 +305,9 @@ let g:gruvbox_italic = 1
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ }
+
+" Always show indent guides
+let g:indent_guides_enable_on_vim_startup = 1
 
 " Construct mapping for repeating
 nnoremap <silent> <Plug>TransposeCharacters xp
@@ -364,6 +380,8 @@ let g:closetag_close_shortcut = '<leader>>'
 set guioptions-=L
 " - Open automatically when Vim starts up
 autocmd vimenter * NERDTree
+" Move the cursor the file editting area
+autocmd VimEnter * NERDTree | wincmd p
 " - Open automatically when Vim starts up if no file were specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif

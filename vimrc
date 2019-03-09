@@ -4,14 +4,14 @@
 
 call plug#begin('~/.vim/bundle')
 
+" display the indention levels with thin vertical lines
+Plug 'Yggdroot/indentLine'
+
 " Tree explorer
 Plug 'scrooloose/nerdtree'
 
 " Commenting
 Plug 'tpope/vim-commentary'
-
-" Displaying indent levels
-Plug 'nathanaelkane/vim-indent-guides'
 
 " Aligning text
 Plug 'godlygeek/tabular'
@@ -41,6 +41,7 @@ Plug 'owickstrom/vim-colors-paramount'
 Plug 'fxn/vim-monochrome'
 Plug 'reedes/vim-colors-pencil'
 Plug 'vim-scripts/turbo.vim'
+Plug 'ayu-theme/ayu-vim'
 
 " Statusline
 " Plug 'vim-airline/vim-airline'
@@ -103,6 +104,7 @@ set list
 
 " Set avoid splitting word across two line
 set linebreak
+set nowrap
 
 " Display line number
 set number
@@ -126,13 +128,13 @@ if has("autocmd")
 
     " Another customizations
     " autocmd BufNewFile,BufRead *.html, *.css, *.js setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType html setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 
     " Use with Jinja
-    au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja ts=2 sts=2 sw=2 expandtab
+    au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja ts=4 sts=4 sw=4 expandtab
 
     " Source vimrc file after saving it
     autocmd bufwritepost .vimrc source $MYVIMRC
@@ -184,9 +186,8 @@ set foldmethod=indent
 set foldlevel=20
 
 " Gui font
-" set guifont=Menlo\ for\ Powerline:h11
-set guifont=Hack:h11
-set linespace=3
+set guifont=Source\ Code\ Pro\ Light:h12
+set linespace=4
 
 " For C/C++, custom build command
 set makeprg=make\ -C\ ./build\ -j9
@@ -280,11 +281,17 @@ let g:flake8_show_in_gutter=1
 let g:flake8_show_in_file=1
 
 " Color scheme settings
-set background=dark
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_bold = 0
-let g:gruvbox_italic = 1
+" set background=dark
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_bold = 0
+" let g:gruvbox_italic = 1
+
+" set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " colorscheme pencil
 
@@ -302,12 +309,9 @@ let g:gruvbox_italic = 1
 
 " Lightline configs
 " Please copy gruvbox.vim to colorscheme of lightline
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ }
-
-" Always show indent guides
-let g:indent_guides_enable_on_vim_startup = 1
+" let g:lightline = {
+"       \ 'colorscheme': 'gruvbox',
+"       \ }
 
 " Construct mapping for repeating
 nnoremap <silent> <Plug>TransposeCharacters xp
@@ -343,7 +347,7 @@ let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_goto_buffer_command = 'new-or-existing-tab'
 
 " For working with virtual env
-let g:ycm_python_interpreter_path = ''
+let g:ycm_python_interpreter_path = 'python'
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = [
   \  'g:ycm_python_interpreter_path',
@@ -394,6 +398,4 @@ map <C-n> :NERDTreeToggle<CR>
 " - Closing Vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" VIM indent guides
-"
-let g:indent_guides_guide_size = 1
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']

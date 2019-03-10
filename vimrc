@@ -7,6 +7,9 @@ call plug#begin('~/.vim/bundle')
 " display the indention levels with thin vertical lines
 Plug 'Yggdroot/indentLine'
 
+" multi-selections
+Plug 'terryma/vim-multiple-cursors'
+
 " Tree explorer
 Plug 'scrooloose/nerdtree'
 

@@ -329,6 +329,9 @@ if executable("ag")
     " CtrlP + Ag
     let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
 
+    let g:ctrlp_cmd = 'CtrlPLastMode'
+    let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
     let g:ctrlp_use_caching = 0
 
     if !exists(":Ag")

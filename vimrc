@@ -114,7 +114,7 @@ set nowrap
 set number
 
 " Width of a line
-set textwidth=120
+set textwidth=100
 set colorcolumn=+1
 
 " Set width of tab and expand tabs into space
@@ -287,8 +287,8 @@ nnoremap ! :!
 " Vim-ALE configs
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-nnoremap <leader>n :lnext<CR>
-nnoremap <leader>p :lprevious<CR>
+nnoremap <leader>e :lnext<CR>
+nnoremap <leader>t :lprevious<CR>
 nnoremap <leader>r :lrewind<CR>
 
 " Color scheme settings

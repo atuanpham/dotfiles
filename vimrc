@@ -71,7 +71,8 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'Valloric/YouCompleteMe'
 
 " Syntax & style checking
-Plug 'nvie/vim-flake8'
+" Plug 'nvie/vim-flake8'
+Plug 'w0rp/ale'
 
 " Structure overview
 Plug 'majutsushi/tagbar'
@@ -143,7 +144,7 @@ if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 
     " Flake8 checking automatically when writing a python file
-    autocmd BufWritePost *.py call Flake8()
+    " autocmd BufWritePost *.py call Flake8()
 endif
 
 " Enable highlighting
@@ -279,9 +280,16 @@ nnoremap ! :!
 
 " Flake* Configs
 " Show signs in the gutter
-let g:flake8_show_in_gutter=1
+" let g:flake8_show_in_gutter=1
 " Show marks in the file
-let g:flake8_show_in_file=1
+" let g:flake8_show_in_file=1
+
+" Vim-ALE configs
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+nnoremap <leader>n :lnext<CR>
+nnoremap <leader>p :lprevious<CR>
+nnoremap <leader>r :lrewind<CR>
 
 " Color scheme settings
 " set background=dark

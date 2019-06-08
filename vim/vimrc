@@ -10,8 +10,8 @@ Plug 'Yggdroot/indentLine'
 " multi-selections
 Plug 'terryma/vim-multiple-cursors'
 
-" Tree explorer
-Plug 'scrooloose/nerdtree'
+" File Manager
+Plug 'scrooloose/nerdtree', { 'tag': '4.2.0' }
 
 " Commenting
 Plug 'tpope/vim-commentary'
@@ -71,8 +71,7 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'Valloric/YouCompleteMe'
 
 " Syntax & style checking
-" Plug 'nvie/vim-flake8'
-Plug 'w0rp/ale'
+Plug 'nvie/vim-flake8'
 
 " Structure overview
 Plug 'majutsushi/tagbar'
@@ -144,7 +143,7 @@ if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 
     " Flake8 checking automatically when writing a python file
-    " autocmd BufWritePost *.py call Flake8()
+    autocmd BufWritePost *.py call Flake8()
 endif
 
 " Enable highlighting
@@ -279,17 +278,8 @@ nnoremap ! :!
 " ==============================================================================
 
 " Flake* Configs
-" Show signs in the gutter
-" let g:flake8_show_in_gutter=1
-" Show marks in the file
-" let g:flake8_show_in_file=1
-
-" Vim-ALE configs
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-nnoremap <leader>e :lnext<CR>
-nnoremap <leader>t :lprevious<CR>
-nnoremap <leader>r :lrewind<CR>
+let g:flake8_show_in_gutter=1
+let g:flake8_show_in_file=1
 
 " Color scheme settings
 " set background=dark
@@ -367,7 +357,7 @@ let g:ycm_extra_conf_vim_data = [
   \  'g:ycm_python_interpreter_path',
   \  'g:ycm_python_sys_path'
   \]
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 " Vim-Closetag plugin
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -405,9 +395,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " - Open automatically when Vim starts up on opening a dir
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0]
-            \ | wincmd p| ene | endif
-" - Shortcut to open NERDTree (Ctrl + n)
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" - Shortcut to open NERDTree (F6)
 nmap <F6> :NERDTreeToggle<CR>
 " - Closing Vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

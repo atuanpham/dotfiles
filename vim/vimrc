@@ -70,6 +70,9 @@ Plug 'tmhedberg/SimpylFold'
 " Plug 'davidhalter/jedi-vim'
 Plug 'Valloric/YouCompleteMe'
 
+" YCM Generator
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
 " Syntax & style checking
 Plug 'nvie/vim-flake8'
 
@@ -267,8 +270,8 @@ nmap <F8> :TagbarToggle<CR>
 nmap <leader>g :YcmCompleter GoTo<CR>
 
 " For C/C++
-nnoremap <F4> :!g++ %:p -o %:p:r<cr>
-nnoremap <F5> :!%:p:r<cr>
+nnoremap <F4> :!g++ %:p -o %:p:r.out<cr>
+nnoremap <F5> :!%:p:r.out<cr>
 
 " Using command line in VIM
 nnoremap ! :!
@@ -276,6 +279,9 @@ nnoremap ! :!
 " ==============================================================================
 " PLUGIN CONFIGS
 " ==============================================================================
+
+" YCM Generator
+nnoremap <C-y> :!~/.vim/bundle/YCM-Generator/config_gen.py -b make -c clang -x c++ --verbose --preserve-environment .<cr>
 
 " Flake* Configs
 let g:flake8_show_in_gutter=1
@@ -357,7 +363,9 @@ let g:ycm_extra_conf_vim_data = [
   \  'g:ycm_python_interpreter_path',
   \  'g:ycm_python_sys_path'
   \]
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_max_diagnostics_to_display = 0
 
 " Vim-Closetag plugin
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -402,3 +410,6 @@ nmap <F6> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" auto-pairs
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", '<':'>'}

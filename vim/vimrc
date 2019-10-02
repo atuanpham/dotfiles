@@ -1,4 +1,5 @@
 " ==============================================================================
+"
 " PLUGINS
 " ==============================================================================
 
@@ -116,7 +117,7 @@ set nowrap
 set number
 
 " Width of a line
-set textwidth=100
+set textwidth=120
 set colorcolumn=+1
 
 " Set width of tab and expand tabs into space
@@ -134,7 +135,7 @@ if has("autocmd")
 
     " Another customizations
     " autocmd BufNewFile,BufRead *.html, *.css, *.js setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType html setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
@@ -270,7 +271,8 @@ nmap <F8> :TagbarToggle<CR>
 nmap <leader>g :YcmCompleter GoTo<CR>
 
 " For C/C++
-nnoremap <F4> :!g++ %:p -o %:p:r.out<cr>
+" nnoremap <F4> :!g++ %:p -o %:p:r.out<cr>
+nnoremap <F4> :!c++ -std=c++11 -stdlib=libc++ %:p -o %:p:r.out<cr>
 nnoremap <F5> :!%:p:r.out<cr>
 
 " Using command line in VIM
@@ -363,8 +365,8 @@ let g:ycm_extra_conf_vim_data = [
   \  'g:ycm_python_interpreter_path',
   \  'g:ycm_python_sys_path'
   \]
-" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_max_diagnostics_to_display = 0
 
 " Vim-Closetag plugin
@@ -410,6 +412,3 @@ nmap <F6> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
-" auto-pairs
-let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", '<':'>'}

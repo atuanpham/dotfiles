@@ -3,7 +3,7 @@
 " PLUGINS
 " ==============================================================================
 
-call plug#begin('~/.vim/bundle')
+call plug#begin()
 
 " display the indention levels with thin vertical lines
 Plug 'Yggdroot/indentLine'
@@ -12,10 +12,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-multiple-cursors'
 
 " File Manager
-Plug 'scrooloose/nerdtree', { 'tag': '4.2.0' }
-
-" Add icons to nerdtree
-Plug 'ryanoasis/vim-devicons'
+" NOTE: Make sure that NNN has been installed before
+Plug 'mcchrish/nnn.vim'
 
 " Commenting
 Plug 'tpope/vim-commentary'
@@ -49,10 +47,9 @@ Plug 'fxn/vim-monochrome'
 Plug 'reedes/vim-colors-pencil'
 Plug 'vim-scripts/turbo.vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Statusline
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 
 " Automatically insert brackets, parens, quotes in pair
@@ -61,9 +58,6 @@ Plug 'jiangmiao/auto-pairs'
 " File navigation
 Plug 'ctrlpvim/ctrlp.vim'
 
-" Using <Tab> in VIM
-" Plug 'ervandew/supertab'
-
 " Closing html tags automatically
 Plug 'alvan/vim-closetag'
 
@@ -71,12 +65,7 @@ Plug 'alvan/vim-closetag'
 Plug 'tmhedberg/SimpylFold'
 
 " Code completion
-" Plug 'davidhalter/jedi-vim'
-Plug 'Valloric/YouCompleteMe'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-
-" YCM Generator
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntax & style checking
 Plug 'nvie/vim-flake8'
@@ -168,6 +157,8 @@ if has("autocmd")
     autocmd BufWritePost *.py call Flake8()
 endif
 
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 " Enable highlighting
 set hls
 
@@ -217,6 +208,41 @@ set linespace=4
 " For C/C++, custom build command
 set makeprg=make\ -C\ ./build\ -j9
 
+
+" NOTE: NeoVim only
+" Floating Window
+function! OpenFloatTerm()
+  let height = float2nr((&lines - 2) / 1.5)
+  let row = float2nr((&lines - height) / 2)
+  let width = float2nr(&columns / 1.5)
+  let col = float2nr((&columns - width) / 2)
+  " Border Window
+  let border_opts = {
+        \ 'relative': 'editor',
+        \ 'row': row - 1,
+        \ 'col': col - 2,
+        \ 'width': width + 4,
+        \ 'height': height + 2,
+        \ 'style': 'minimal'
+        \ }
+  let border_buf = nvim_create_buf(v:false, v:true)
+  let s:border_win = nvim_open_win(border_buf, v:true, border_opts)
+  " Main Window
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': row,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+  let buf = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(buf, v:true, opts)
+  terminal
+  startinsert
+  " Hook up TermClose event to close both terminal and border windows
+  autocmd TermClose * ++once :q | call nvim_win_close(s:border_win, v:true)
+endfunction
 
 " ==============================================================================
 " SHORTCUTS
@@ -285,9 +311,6 @@ map =j :%!python -m json.tool<CR>
 " tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" YouCompleteMe
-nmap <leader>g :YcmCompleter GoTo<CR>
-
 " For C/C++
 " nnoremap <F4> :!g++ %:p -o %:p:r.out<cr>
 autocmd FileType cpp nnoremap <F4> :!c++ -std=c++11 -stdlib=libc++ %:p -o %:p:r.out<cr>
@@ -298,6 +321,9 @@ autocmd FileType python nnoremap <F5> :!python %:p<cr>
 
 " Using command line in VIM
 nnoremap ! :!
+
+" Open Terminal in NeoVim
+map <leader>t :call OpenFloatTerm()<CR>
 
 " ==============================================================================
 " PLUGIN CONFIGS
@@ -317,31 +343,24 @@ let g:flake8_show_in_file=1
 " let g:gruvbox_bold = 0
 " let g:gruvbox_italic = 1
 
-" set termguicolors     " enable true colors support
-" let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+" PaperColor Scheme
+set background=dark
+colorscheme PaperColor
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+let g:lightline = { 'colorscheme': 'PaperColor' }
 
-" colorscheme pencil
-
-" Scheme pencil
-" let g:pencil_higher_contrast_ui = 1
-" let g:pencil_neutral_code_bg = 1
-
-" Airline configs
-" NOTE: Install Powerline fonts at: https://github.com/powerline/fonts
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#show_buffers = 0
-" let g:airline#extensions#tabline#show_tabs = 1
-" let g:airline_theme='badwolf'
-" let g:airline_powerline_fonts = 1
-
-" Lightline configs
-" Please copy gruvbox.vim to colorscheme of lightline
-" let g:lightline = {
-"       \ 'colorscheme': 'gruvbox',
-"       \ }
 
 " Construct mapping for repeating
 nnoremap <silent> <Plug>TransposeCharacters xp
@@ -367,29 +386,6 @@ if executable("ag")
     endif
 endif
 
-" SympylFold configs
-let g:SimpylFold_docstring_preview = 1
-
-" Jedi configs
-" Use tabs when going to definitions
-" let g:jedi#use_tabs_not_buffers = 1
-
-" YouCompleteMe configs
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 0
-let g:ycm_goto_buffer_command = 'new-or-existing-tab'
-
-" For working with virtual env
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-let g:ycm_global_ycm_extra_conf = '~/.vim/global_extra_conf.py'
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
-let g:ycm_max_diagnostics_to_display = 0
-
 " Vim-Closetag plugin
 " filenames like *.xml, *.html, *.xhtml, ...
 " Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
@@ -414,22 +410,29 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
-" NERDTree configs
-" Hide scrollbar in NERDTree
-set guioptions-=L
-" - Open automatically when Vim starts up
-autocmd vimenter * NERDTree
-" Move the cursor the file editting area
-autocmd VimEnter * NERDTree | wincmd p
-" - Open automatically when Vim starts up if no file were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" - Open automatically when Vim starts up on opening a dir
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-" - Shortcut to open NERDTree (F6)
-nmap <F6> :NERDTreeToggle<CR>
-" - Closing Vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
+" IndentLine configs
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" NNN Configs using with Floating window
+" Opens the nnn window in a split
+let g:nnn#layout = 'new' " or vnew, tabnew etc.
+
+" Or pass a dictionary with window size
+let g:nnn#layout = { 'left': '~20%' } " or right, up, down
+
+" COC configs
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ==============================================================================
 # DEFINE CONSTANTS
@@ -14,8 +14,8 @@ ROOT_PATH=`dirname "$BASH_SOURCE"`/..
 HOME_DIR=${HOME}
 PACKAGE_MANAGER=brew
 
-ANACONDA_DOWNLOAD_LINK=https://repo.anaconda.com/archive/Anaconda3-2019.10-MacOSX-x86_64.sh
-ANACONDA_SH_FILE=Anaconda3-2019.10-MacOSX-x86_64.sh
+ANACONDA=https://repo.anaconda.com/archive/Anaconda3-2019.03-MacOSX-x86_64.sh
+ANACONDA_SH_FILE=Anaconda3-2019.03-MacOSX-x86_64.sh
 
 
 # ==============================================================================

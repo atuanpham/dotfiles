@@ -1,0 +1,15 @@
+alias vim='nvim'
+
+alias ag='ag --hidden --path-to-agignore=~/.agignore'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+alias l='ls -lh'
+alias la='l -A'
+alias ls='ls --color=auto --group-directories-first -X'
+
+alias tarc='tar -zcvf file.tar.gz'
+alias tarx='tar -zxvf'

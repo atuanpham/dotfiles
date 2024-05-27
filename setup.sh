@@ -3,7 +3,8 @@
 DOTFILES_DIR_PATH=`dirname "$BASH_SOURCE"`
 BASH_DIR=${HOME}/.bash
 
-# Check OS
+# Currently, I'm using MacOS only.
+# Therefore, this script just works fine in MacOS.
 if [[ "${OSTYPE}" != "darwin"* ]]; then
     echo "This script only support MacOS system."
     exit 1

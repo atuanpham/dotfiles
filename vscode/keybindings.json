@@ -54,5 +54,5 @@
       "key": "shift+alt+f",
       "command": "editor.action.formatDocument"
     }
-  ]
+]
   

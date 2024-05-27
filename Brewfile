@@ -1,8 +1,3 @@
-# Taps
-tap 'homebrew/bundle'
-tap 'homebrew/cask'
-tap 'homebrew/core'
-
 # Regular packages
 brew 'coreutils'
 brew 'git'

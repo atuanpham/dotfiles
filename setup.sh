@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_DIR_PATH=`dirname "$BASH_SOURCE"`
+DOTFILES_DIR_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 BASH_DIR=${HOME}/.bash
 
 # Currently, I'm using MacOS only.
@@ -14,9 +14,13 @@ fi
 vscode_extensions=(
     vscodevim.vim
     ms-python.python
+    ms-python.pylint
+    ms-python.flake8
+    ms-python.mypy
     eamodio.gitlens
     visualstudioexptteam.vscodeintellicode
     formulahendry.code-runner
+    wheredoesyourmindgo.gruvbox-concoctis
 )
 
 install_vscode_extensions() {
@@ -60,15 +64,14 @@ conda init bash
 source ~/.bash_profile
 
 # Create a Python development environment
-conda create -n pydev python=3 -y
-conda activate pydev
+conda activate base
 
 # Install Python packages
 conda install -c conda-forge black isort pylint -y
 
 # Symlink VSCode configuration files
 VSCODE_CONFIG_DIR="$HOME/Library/Application Support/Code/User"
-ln -sf "${DOTFILES_DIR_PATH}/vscode/settings.json" "$VSCODE_CONFIG_DIR/settings.json"
-ln -sf "${DOTFILES_DIR_PATH}/vscode/keybindings.json" "$VSCODE_CONFIG_DIR/keybindings.json"
+ln -sf "${DOTFILES_DIR_PATH}"/vscode/settings.json "$VSCODE_CONFIG_DIR"/settings.json
+ln -sf "${DOTFILES_DIR_PATH}"/vscode/keybindings.json "$VSCODE_CONFIG_DIR"/keybindings.json
 
 echo "Dotfiles setup complete!"

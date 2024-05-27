@@ -42,8 +42,8 @@
     "<C-f>": false
   },
   // Editor settings
-  "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 11.5,
+  "editor.fontFamily": "Hack Nerd Font Mono, Fira Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 12,
   "editor.lineHeight": 20,
   "editor.rulers": [
     120
@@ -53,29 +53,15 @@
   "editor.cursorBlinking": "solid",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "workbench.colorTheme": "Atom One Dark",
+  "workbench.colorTheme": "gruvboxConcoctis dark hard",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.indent": 30,
   // Python settings
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": [
-    "--line-length",
-    "120"
-  ],
-  "python.sortImports.args": [
-    "--profile",
-    "black"
-  ],
-  "python.pythonPath": "/usr/local/miniconda3/envs/pydev/bin/python",
-  "python.linting.pylintPath": "/usr/local/miniconda3/envs/pydev/bin/pylint",
-  "python.formatting.blackPath": "/usr/local/miniconda3/envs/pydev/bin/black",
-  "python.sortImports.path": "/usr/local/miniconda3/envs/pydev/bin/isort",
+  "python.pythonPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
   // Terminal settings
   "terminal.integrated.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
-  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontSize": 12,
   // File explorer settings
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -85,5 +71,7 @@
   "breadcrumbs.symbolPath": "off",
   // Other settings
   "files.autoSave": "onFocusChange",
-  "window.zoomLevel": 0
+  "window.zoomLevel": 0,
+  "editor.fontVariations": false,
+  "terminal.integrated.inheritEnv": false
 }

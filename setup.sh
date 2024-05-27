@@ -1,5 +1,6 @@
 #!/bin/bash
 
+DOTFILES_DIR_PATH=`dirname "$BASH_SOURCE"`
 BASH_DIR=${HOME}/.bash
 
 # Check OS
@@ -8,16 +9,33 @@ if [[ "${OSTYPE}" != "darwin"* ]]; then
     exit 1
 fi
 
-# Set up bash configuration files
-mkdir -p ~/.bash
-echo "Setting up bash scripts"
+# Array of VSCode extensions to install
+vscode_extensions=(
+    vscodevim.vim
+    ms-python.python
+    eamodio.gitlens
+    visualstudioexptteam.vscodeintellicode
+    formulahendry.code-runner
+)
 
-# Create symlinks for bash configuration files
-ln -sf "${HOME}/dotfiles/bash/bash_profile" "${HOME}/.bash_profile"
-ln -sf "${HOME}/dotfiles/bash/aliases" "${HOME}/.bash/aliases"
-ln -sf "${HOME}/dotfiles/bash/prompt" "${HOME}/.bash/prompt"
-ln -sf "${HOME}/dotfiles/bash/exports" "${HOME}/.bash/exports"
-ln -sf "${HOME}/dotfiles/bash/functions" "${HOME}/.bash/functions"
+install_vscode_extensions() {
+    for extension in "$@"; do
+        code --install-extension "$extension"
+    done
+}
+
+setup_bash_profile() {
+    # Set up bash configuration files
+    mkdir -p ~/.bash
+    echo "Setting up bash scripts"
+
+    # Create symlinks for bash configuration files
+    ln -sf "${DOTFILES_DIR_PATH}/bash/bash_profile" "${HOME}/.bash_profile"
+    ln -sf "${DOTFILES_DIR_PATH}/bash/aliases" "${HOME}/.bash/aliases"
+    ln -sf "${DOTFILES_DIR_PATH}/bash/prompt" "${HOME}/.bash/prompt"
+    ln -sf "${DOTFILES_DIR_PATH}/bash/exports" "${HOME}/.bash/exports"
+    ln -sf "${DOTFILES_DIR_PATH}/bash/functions" "${HOME}/.bash/functions"
+}
 
 # Install Homebrew if not already installed
 if ! command -v brew &> /dev/null; then
@@ -26,22 +44,17 @@ if ! command -v brew &> /dev/null; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-brew install coreutils
+# Update Homebrew and upgrade existing packages
+brew update
+brew upgrade
 
-# Install VSCode using Homebrew
-brew install --cask visual-studio-code
+brew bundle cleanup
+brew bundle -v --force --file="${DOTFILES_DIR_PATH}/Brewfile"
 
 # Install VSCode extensions
-code --install-extension vscodevim.vim
-code --install-extension ms-python.python
-code --install-extension eamodio.gitlens
-code --install-extension visualstudioexptteam.vscodeintellicode
-code --install-extension formulahendry.code-runner
+install_vscode_extensions "${vscode_extensions[@]}"
 
-# Install Miniconda
-brew install miniconda
-
-# Set up Miniconda
+# Initialize Conda
 conda init bash
 source ~/.bash_profile
 
@@ -54,7 +67,7 @@ conda install -c conda-forge black isort pylint -y
 
 # Symlink VSCode configuration files
 VSCODE_CONFIG_DIR="$HOME/Library/Application Support/Code/User"
-ln -sf "$HOME/dotfiles/vscode/settings.json" "$VSCODE_CONFIG_DIR/settings.json"
-ln -sf "$HOME/dotfiles/vscode/keybindings.json" "$VSCODE_CONFIG_DIR/keybindings.json"
+ln -sf "${DOTFILES_DIR_PATH}/vscode/settings.json" "$VSCODE_CONFIG_DIR/settings.json"
+ln -sf "${DOTFILES_DIR_PATH}/vscode/keybindings.json" "$VSCODE_CONFIG_DIR/keybindings.json"
 
-echo "VSCode and Miniconda setup complete!"
+echo "Dotfiles setup complete!"

@@ -22,7 +22,7 @@ To set up the development environment with these configurations, follow these st
 
 3. Run the setup script:
    ```
-   chmod +x setup.py
+   chmod +x setup.sh
    ./setup.sh
    ```
 

@@ -1,52 +1,58 @@
 [
-  // Navigation
-  {
-    "key": "cmd+h",
-    "command": "workbench.action.navigateLeft"
-  },
-  {
-    "key": "cmd+j",
-    "command": "workbench.action.navigateDown"
-  },
-  {
-    "key": "cmd+k",
-    "command": "workbench.action.navigateUp"
-  },
-  {
-    "key": "cmd+l",
-    "command": "workbench.action.navigateRight"
-  },
-  // Panel navigation
-  {
-    "key": "shift+cmd+j",
-    "command": "workbench.action.previousSideBarView"
-  },
-  {
-    "key": "shift+cmd+k",
-    "command": "workbench.action.nextSideBarView"
-  },
-  // Terminal
-  {
-    "key": "cmd+`",
-    "command": "workbench.action.terminal.toggleTerminal"
-  },
-  {
-    "key": "cmd+shift+`",
-    "command": "workbench.action.terminal.new"
-  },
-  // File explorer
-  {
-    "key": "cmd+shift+e",
-    "command": "workbench.view.explorer"
-  },
-  // Quick open
-  {
-    "key": "cmd+p",
-    "command": "workbench.action.quickOpen"
-  },
-  // Format document
-  {
-    "key": "cmd + shift + f",
-    "command": "editor.action.formatDocument"
-  }
+    // Navigation
+    {
+      "key": "ctrl+h",
+      "command": "workbench.action.navigateLeft"
+    },
+    {
+      "key": "ctrl+j",
+      "command": "workbench.action.navigateDown"
+    },
+    {
+      "key": "ctrl+k",
+      "command": "workbench.action.navigateUp"
+    },
+    {
+      "key": "ctrl+l",
+      "command": "workbench.action.navigateRight"
+    },
+  
+    // Panel navigation
+    {
+      "key": "shift+ctrl+h",
+      "command": "workbench.action.previousSideBarView"
+    },
+    {
+      "key": "shift+ctrl+l",
+      "command": "workbench.action.nextSideBarView"
+    },
+  
+    // Terminal
+    {
+      "key": "ctrl+`",
+      "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+      "key": "ctrl+shift+`",
+      "command": "workbench.action.terminal.new"
+    },
+  
+    // File explorer
+    {
+      "key": "ctrl+shift+e",
+      "command": "workbench.view.explorer"
+    },
+  
+    // Quick open
+    {
+      "key": "ctrl+p",
+      "command": "workbench.action.quickOpen"
+    },
+  
+    // Format document
+    {
+      "key": "shift+alt+f",
+      "command": "editor.action.formatDocument"
+    }
 ]
+  

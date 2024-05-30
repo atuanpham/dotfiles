@@ -53,14 +53,12 @@
   "editor.cursorBlinking": "solid",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "gruvboxConcoctis dark hard",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.tree.indent": 20,
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.tree.indent": 30,
   // Python settings
   "python.pythonPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
-  "flake8.args": [
-    "--max-line-length=120"
-  ],
   // Terminal settings
   "terminal.integrated.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
   "terminal.integrated.fontSize": 12,
@@ -75,6 +73,5 @@
   "files.autoSave": "onFocusChange",
   "window.zoomLevel": 0,
   "editor.fontVariations": false,
-  "terminal.integrated.inheritEnv": false,
-  "autoDocstring.docstringFormat": "sphinx"
+  "terminal.integrated.inheritEnv": false
 }

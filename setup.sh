@@ -20,7 +20,9 @@ vscode_extensions=(
     eamodio.gitlens
     visualstudioexptteam.vscodeintellicode
     formulahendry.code-runner
+    njpwerner.autodocstring
     wheredoesyourmindgo.gruvbox-concoctis
+    arcticicestudio.nord-visual-studio-code
 )
 
 install_vscode_extensions() {

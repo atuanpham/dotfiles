@@ -51,8 +51,6 @@
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "boundary",
   "editor.cursorBlinking": "solid",
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
   "workbench.colorTheme": "Nord",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 20,
@@ -60,6 +58,10 @@
   "python.pythonPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
   "flake8.args": [
     "--max-line-length=120"
+  ],
+  "pylint.args": [
+    "--max-line-length=120",
+    "--disable=C0116"
   ],
   // Terminal settings
   "terminal.integrated.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
@@ -76,5 +78,14 @@
   "window.zoomLevel": 0,
   "editor.fontVariations": false,
   "terminal.integrated.inheritEnv": false,
-  "autoDocstring.docstringFormat": "sphinx"
+  "autoDocstring.docstringFormat": "sphinx",
+  "python.defaultInterpreterPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
+  "cmake.showOptionsMovedNotification": false,
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.formatting": "clangFormat",
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "C_Cpp.clang_format_fallbackStyle": "none",
+  "C_Cpp.clang_format_style": "file:${HOME}/dotfiles/.clang-format"
 }

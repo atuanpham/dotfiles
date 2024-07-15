@@ -12,6 +12,8 @@ brew 'vim'
 brew 'mas'
 brew 'ssh-copy-id'
 brew 'podman'
+brew 'cmake'
+brew 'clang-format'
 
 # Cask packages
 cask 'miniconda'

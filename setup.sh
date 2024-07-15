@@ -16,7 +16,14 @@ vscode_extensions=(
     ms-python.python
     ms-python.pylint
     ms-python.flake8
+    ms-python.debugpy
     ms-python.mypy
+    ms-python.vscode-pylance
+    ms-vscode.cmake-tools
+    ms-vscode.cpptools
+    ms-vscode.cpptools-extension-pack
+    ms-vscode.cpptools-themes
+    ms-vscode.makefile-tools
     eamodio.gitlens
     visualstudioexptteam.vscodeintellicode
     formulahendry.code-runner

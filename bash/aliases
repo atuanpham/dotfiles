@@ -16,3 +16,5 @@ alias la='ls -lha --color=auto --group-directories-first'
 
 alias tarc='tar -zcvf file.tar.gz'
 alias tarx='tar -zxvf'
+
+alias docker='podman'

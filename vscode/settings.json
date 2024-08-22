@@ -61,7 +61,8 @@
   ],
   "pylint.args": [
     "--max-line-length=120",
-    "--disable=C0116"
+    "--disable=C0116,C0114,C0115",
+    "--init-hook=\"from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))\""
   ],
   // Terminal settings
   "terminal.integrated.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
@@ -78,14 +79,24 @@
   "window.zoomLevel": 0,
   "editor.fontVariations": false,
   "terminal.integrated.inheritEnv": false,
-  "autoDocstring.docstringFormat": "sphinx",
   "python.defaultInterpreterPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
   "cmake.showOptionsMovedNotification": false,
-  "C_Cpp.autocompleteAddParentheses": true,
   "C_Cpp.formatting": "clangFormat",
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "C_Cpp.clang_format_fallbackStyle": "none",
-  "C_Cpp.clang_format_style": "file:${HOME}/dotfiles/.clang-format"
+  "C_Cpp.clang_format_style": "file:${HOME}/dotfiles/.clang-format",
+  "autoDocstring.startOnNewLine": true,
+  "[yaml]": {
+    "editor.indentSize": "tabSize",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.autoIndent": "advanced",
+    "diffEditor.ignoreTrimWhitespace": false
+  },
+  "makefile.configureOnOpen": true,
+  "python.autoComplete.extraPaths": [
+    
+  ]
 }

@@ -14,6 +14,9 @@ brew 'ssh-copy-id'
 brew 'podman'
 brew 'cmake'
 brew 'clang-format'
+brew 'python@3.11'
+brew 'pipx'
+brew 'libomp'
 
 # Cask packages
 cask 'miniconda'

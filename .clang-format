@@ -53,7 +53,7 @@ BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
 
 # Alignment
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: BlockIndent
 AlignConsecutiveAssignments: None
 AlignConsecutiveBitFields: None
 AlignConsecutiveDeclarations: None

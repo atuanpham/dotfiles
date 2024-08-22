@@ -19,12 +19,14 @@ vscode_extensions=(
     ms-python.debugpy
     ms-python.mypy
     ms-python.vscode-pylance
+    ms-python.isort
     ms-vscode.cmake-tools
     ms-vscode.cpptools
     ms-vscode.cpptools-extension-pack
     ms-vscode.cpptools-themes
     ms-vscode.makefile-tools
     eamodio.gitlens
+    tamasfe.even-better-toml
     visualstudioexptteam.vscodeintellicode
     formulahendry.code-runner
     njpwerner.autodocstring

@@ -98,5 +98,10 @@
   "makefile.configureOnOpen": true,
   "python.autoComplete.extraPaths": [
     
-  ]
+  ],
+  "python.analysis.extraPaths": [],
+  "notebook.lineNumbers": "on",
+  "files.exclude": {
+    "**/__pycache__": true
+  }
 }

@@ -18,9 +18,20 @@ brew 'python@3.11'
 brew 'pipx'
 brew 'libomp'
 
+# C++ development tools
+brew 'llvm'
+brew 'gcc'
+brew 'gdb'
+brew 'boost'
+brew 'ninja'
+brew 'ccache'
+brew 'cppcheck'
+brew 'valgrind'
+
 # Cask packages
 cask 'miniconda'
 cask 'visual-studio-code'
+cask 'cursor'
 cask 'iterm2'
 cask 'postman'
 

@@ -17,6 +17,7 @@ brew 'clang-format'
 brew 'python@3.11'
 brew 'pipx'
 brew 'libomp'
+brew 'uv'
 
 # C++ development tools
 brew 'llvm'

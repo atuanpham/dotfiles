@@ -103,5 +103,6 @@
   "notebook.lineNumbers": "on",
   "files.exclude": {
     "**/__pycache__": true
-  }
+  },
+  "workbench.startupEditor": "none"
 }

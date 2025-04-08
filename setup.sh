@@ -43,22 +43,32 @@ vscode_extensions=(
 install_vscode_extensions() {
     for extension in "$@"; do
         code --install-extension "$extension"
-        cursor --install-extension "$extension"
     done
 }
 
 setup_bash_profile() {
+    # Check if setup has already been completed
+    if [ -L "${HOME}/.bashrc" ] && [ -L "${HOME}/.bash/aliases" ] && \
+       [ -L "${HOME}/.bash/prompt" ] && [ -L "${HOME}/.bash/exports" ] && \
+       [ -L "${HOME}/.bash/functions" ] && \
+       grep -q 'source "$HOME/.bashrc"' "${HOME}/.bash_profile" 2>/dev/null; then
+        echo "Bash profile already set up. Skipping."
+        return 0
+    fi
+
     # Set up bash configuration files
     mkdir -p ~/.bash
     echo "Setting up bash scripts"
-
     # Create symlinks for bash configuration files
-    ln -sf "${DOTFILES_DIR_PATH}/bash/bash_profile" "${HOME}/.bash_profile"
+    ln -sf "${DOTFILES_DIR_PATH}/bash/bashrc" "${HOME}/.bashrc"
     ln -sf "${DOTFILES_DIR_PATH}/bash/aliases" "${HOME}/.bash/aliases"
     ln -sf "${DOTFILES_DIR_PATH}/bash/prompt" "${HOME}/.bash/prompt"
     ln -sf "${DOTFILES_DIR_PATH}/bash/exports" "${HOME}/.bash/exports"
     ln -sf "${DOTFILES_DIR_PATH}/bash/functions" "${HOME}/.bash/functions"
+    (echo 'source "$HOME/.bashrc"') >> $HOME/.bash_profile
 }
+
+setup_bash_profile
 
 # Install Homebrew if not already installed
 if ! command -v brew &> /dev/null; then
@@ -139,13 +149,6 @@ fi
 # Symlink VSCode configuration files
 VSCODE_CONFIG_DIR="$HOME/Library/Application Support/Code/User"
 CURSOR_CONFIG_DIR="$HOME/Library/Application Support/Cursor/User"
-
-# Create Cursor config directory if it doesn't exist and Cursor is installed
-if [ -d "/Applications/Cursor.app" ]; then
-    mkdir -p "$CURSOR_CONFIG_DIR"
-    ln -sf "${DOTFILES_DIR_PATH}"/vscode/settings.json "$CURSOR_CONFIG_DIR"/settings.json
-    ln -sf "${DOTFILES_DIR_PATH}"/vscode/keybindings.json "$CURSOR_CONFIG_DIR"/keybindings.json
-fi
 
 # Symlink VSCode configuration files
 ln -sf "${DOTFILES_DIR_PATH}"/vscode/settings.json "$VSCODE_CONFIG_DIR"/settings.json

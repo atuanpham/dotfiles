@@ -32,7 +32,6 @@ brew 'valgrind'
 # Cask packages
 cask 'miniconda'
 cask 'visual-studio-code'
-cask 'cursor'
 cask 'iterm2'
 cask 'postman'
 

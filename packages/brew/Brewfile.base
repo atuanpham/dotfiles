@@ -1,0 +1,13 @@
+# Core tools and utilities
+brew 'coreutils'
+brew 'git'
+brew 'the_silver_searcher'
+brew 'curl'
+brew 'wget'
+brew 'htop'
+brew 'jq'
+brew 'openssh'
+brew 'openssl'
+brew 'vim'
+brew 'ssh-copy-id'
+brew 'mas'  # Mac App Store CLI

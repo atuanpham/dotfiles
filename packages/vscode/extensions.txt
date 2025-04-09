@@ -1,0 +1,44 @@
+# Vim
+vscodevim.vim
+
+# Python
+ms-python.python
+ms-python.pylint
+ms-python.flake8
+ms-python.debugpy
+# ms-python.mypy
+ms-python.vscode-pylance
+ms-python.isort
+
+# C/C++
+ms-vscode.cmake-tools
+ms-vscode.cpptools
+ms-vscode.cpptools-extension-pack
+ms-vscode.cpptools-themes
+ms-vscode.makefile-tools
+twxs.cmake
+xaver.clang-format
+jeff-hykin.better-cpp-syntax
+cschlosser.doxdocgen
+
+# Git
+eamodio.gitlens
+
+# Documentation
+njpwerner.autodocstring
+
+# TOML
+tamasfe.even-better-toml
+
+# AI
+visualstudioexptteam.vscodeintellicode
+
+# Code runner
+formulahendry.code-runner
+
+# Themes
+wheredoesyourmindgo.gruvbox-concoctis
+arcticicestudio.nord-visual-studio-code
+
+# Tools
+dorianmassoulier.repomix-runner

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Vim
+# Uncomment to use neovim instead of vim
+# alias vim='nvim'
+
+# Search
+alias ag='ag --hidden --path-to-agignore=~/.agignore'
+
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# Listing files
+if [[ "$OSTYPE" != linux-gnu* ]]; then
+    # Use GNU ls on macOS if installed via coreutils
+    which gls &>/dev/null && alias ls='gls --color=auto'
+fi
+
+alias ll='ls -lh --color=auto --group-directories-first'
+alias la='ls -lha --color=auto --group-directories-first'
+
+# Archives
+alias tarc='tar -zcvf'
+alias tarx='tar -zxvf'
+
+# Use Podman instead of Docker
+alias docker='podman'
+
+# Git shortcuts
+alias g='git'
+alias gs='git status'
+alias gl='git log'
+alias gd='git diff'
+
+# Safety features
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Dotfiles management
+alias dotfiles='cd $DOTFILES_DIR'
+alias dotupdate='update-dotfiles'

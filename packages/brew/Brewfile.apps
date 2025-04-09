@@ -1,0 +1,12 @@
+# GUI Applications and fonts
+
+# Applications
+cask 'miniconda'
+cask 'visual-studio-code'
+cask 'iterm2'
+cask 'postman'
+
+# Fonts
+cask 'font-fira-code'
+cask 'font-hack-nerd-font'
+cask 'font-source-code-pro'

@@ -104,5 +104,14 @@
   "files.exclude": {
     "**/__pycache__": true
   },
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "repomix.ignore.customPatterns": [
+    "Brewfile.lock.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "[ruby]": {
+    
+    "editor.defaultColorDecorators": "never"
+  }
 }

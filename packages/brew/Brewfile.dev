@@ -1,0 +1,27 @@
+# Development tools
+
+# Container tools
+brew 'podman'
+
+# Build tools
+brew 'cmake'
+brew 'ninja'
+brew 'ccache'
+
+# C/C++ development
+brew 'clang-format'
+brew 'llvm'
+brew 'gcc'
+brew 'gdb'
+brew 'boost'
+brew 'cppcheck'
+brew 'valgrind'
+
+# Python development
+brew 'python@3.11'
+brew 'pipx'
+brew 'libomp'
+brew 'uv'
+
+# JavaScript/Node.js development
+brew 'node'

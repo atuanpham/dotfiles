@@ -1,0 +1,50 @@
+[user]
+    name = "Tuan Pham"
+    email = "tuan.phamanh@outlook.com"
+
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore_global
+    autocrlf = input
+    whitespace = trailing-space,space-before-tab
+
+[init]
+    defaultBranch = main
+
+[color]
+    ui = auto
+
+[pull]
+    rebase = true
+
+[push]
+    default = simple
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+[diff]
+    colorMoved = zebra
+
+[merge]
+    conflictstyle = diff3
+
+[alias]
+    # Shortcuts
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    df = diff
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    amend = commit --amend --no-edit
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    visual = !gitk
+
+[credential]
+    helper = cache --timeout=3600
+
+[help]
+    autocorrect = 1

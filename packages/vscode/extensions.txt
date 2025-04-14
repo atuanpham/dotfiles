@@ -4,11 +4,10 @@ vscodevim.vim
 # Python
 ms-python.python
 ms-python.pylint
-ms-python.flake8
-ms-python.debugpy
-# ms-python.mypy
-ms-python.vscode-pylance
+ms-python.black-formatter
 ms-python.isort
+ms-python.debugpy
+ms-python.vscode-pylance
 
 # C/C++
 ms-vscode.cmake-tools
@@ -31,7 +30,7 @@ njpwerner.autodocstring
 tamasfe.even-better-toml
 
 # AI
-visualstudioexptteam.vscodeintellicode
+continue.continue
 
 # Code runner
 formulahendry.code-runner

@@ -1,5 +1,6 @@
 {
   // Vim settings
+  "vim.sneak": true,
   "vim.easymotion": true,
   "vim.incsearch": true,
   "vim.useSystemClipboard": true,
@@ -46,7 +47,7 @@
   "editor.fontSize": 12,
   "editor.lineHeight": 20,
   "editor.rulers": [
-    120
+    88
   ],
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "boundary",
@@ -56,37 +57,47 @@
   "workbench.tree.indent": 20,
   // Python settings
   "python.pythonPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
-  "flake8.args": [
-    "--max-line-length=120"
+  "python.defaultInterpreterPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "88"],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--max-line-length=88",
+    "--disable=C0111"
   ],
-  "pylint.args": [
-    "--max-line-length=120",
-    "--disable=C0116,C0114,C0115",
-    "--init-hook=\"from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))\""
-  ],
+  "isort.args": ["--profile", "black"],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.analysis.extraPaths": [],
   // Terminal settings
   "terminal.integrated.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
   "terminal.integrated.fontSize": 12,
-  // File explorer settings
+  // Explorer settings
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   // Breadcrumbs settings
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "last",
   "breadcrumbs.symbolPath": "off",
-  // Other settings
-  "files.autoSave": "onFocusChange",
-  "window.zoomLevel": 0,
-  "editor.fontVariations": false,
-  "terminal.integrated.inheritEnv": false,
-  "python.defaultInterpreterPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
-  "cmake.showOptionsMovedNotification": false,
+  // C/C++ settings
   "C_Cpp.formatting": "clangFormat",
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "C_Cpp.clang_format_fallbackStyle": "none",
   "C_Cpp.clang_format_style": "file:${HOME}/dotfiles/.clang-format",
+  // Other settings
+  "files.autoSave": "onFocusChange",
+  "window.zoomLevel": 0,
+  "editor.fontVariations": false,
+  "terminal.integrated.inheritEnv": false,
+  "cmake.showOptionsMovedNotification": false,
   "autoDocstring.startOnNewLine": true,
   "[yaml]": {
     "editor.indentSize": "tabSize",
@@ -96,10 +107,6 @@
     "diffEditor.ignoreTrimWhitespace": false
   },
   "makefile.configureOnOpen": true,
-  "python.autoComplete.extraPaths": [
-    
-  ],
-  "python.analysis.extraPaths": [],
   "notebook.lineNumbers": "on",
   "files.exclude": {
     "**/__pycache__": true

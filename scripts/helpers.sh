@@ -37,13 +37,13 @@ link_file() {
     local src="$1"
     local dest="$2"
     local backup_dir="${HOME}/.dotfiles_backup/$(date +%Y%m%d-%H%M%S)"
-    
+
     # Check if the destination already exists and is not a symlink to the source
     if [[ -e "$dest" && ! -L "$dest" ]] || [[ -L "$dest" && "$(readlink "$dest")" != "$src" ]]; then
         if [[ "$FORCE" == "true" ]]; then
             # Create backup directory if it doesn't exist
             mkdir -p "$backup_dir"
-            
+
             # Backup the existing file
             mv "$dest" "${backup_dir}/$(basename "$dest")"
             info "Backed up existing file: $dest to ${backup_dir}/$(basename "$dest")"
@@ -52,7 +52,7 @@ link_file() {
             return 1
         fi
     fi
-    
+
     # Create the symlink
     ln -sf "$src" "$dest"
     success "Linked $src to $dest"
@@ -74,15 +74,15 @@ log_to_file() {
 run_command() {
     local cmd="$1"
     local error_msg="${2:-Command failed}"
-    
+
     info "Running: $cmd"
     log_to_file "Running: $cmd"
-    
+
     if ! eval "$cmd"; then
         error "$error_msg"
         log_to_file "ERROR: $error_msg"
         return 1
     fi
-    
+
     return 0
 }

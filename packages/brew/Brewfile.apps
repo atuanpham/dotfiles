@@ -5,6 +5,7 @@ cask 'miniconda'
 cask 'visual-studio-code'
 cask 'iterm2'
 cask 'postman'
+cask 'podman-desktop'
 
 # Fonts
 cask 'font-fira-code'

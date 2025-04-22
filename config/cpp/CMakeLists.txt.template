@@ -1,0 +1,115 @@
+cmake_minimum_required(VERSION 3.14)
+project(
+    ProjectName
+    VERSION 0.1.0
+    DESCRIPTION "Project Description"
+    LANGUAGES CXX)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Options
+option(BUILD_TESTS "Build tests" ON)
+option(ENABLE_WARNINGS "Enable warnings" ON)
+option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors" OFF)
+option(ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" OFF)
+option(ENABLE_SANITIZER_UNDEFINED "Enable undefined behavior sanitizer" OFF)
+option(ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
+option(ENABLE_CLANG_TIDY "Enable clang-tidy" OFF)
+option(ENABLE_CPPCHECK "Enable cpp-check" OFF)
+
+# Set output directories
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Include directories
+include_directories(
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/src
+)
+
+# Compiler warnings
+if(MSVC)
+    if(ENABLE_WARNINGS)
+        add_compile_options(/W4)
+        if(ENABLE_WARNINGS_AS_ERRORS)
+            add_compile_options(/WX)
+        endif()
+    endif()
+else()
+    if(ENABLE_WARNINGS)
+        add_compile_options(-Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wnon-virtual-dtor -Wold-style-cast)
+        if(ENABLE_WARNINGS_AS_ERRORS)
+            add_compile_options(-Werror)
+        endif()
+    endif()
+endif()
+
+# Sanitizers
+if(ENABLE_SANITIZER_ADDRESS)
+    add_compile_options(-fsanitize=address)
+    add_link_options(-fsanitize=address)
+endif()
+
+if(ENABLE_SANITIZER_UNDEFINED)
+    add_compile_options(-fsanitize=undefined)
+    add_link_options(-fsanitize=undefined)
+endif()
+
+if(ENABLE_SANITIZER_THREAD)
+    add_compile_options(-fsanitize=thread)
+    add_link_options(-fsanitize=thread)
+endif()
+
+# Code coverage
+if(ENABLE_COVERAGE)
+    add_compile_options(--coverage -O0 -g)
+    add_link_options(--coverage)
+endif()
+
+# Source files
+file(GLOB_RECURSE SOURCES
+    ${PROJECT_SOURCE_DIR}/src/*.cpp
+)
+
+# Library
+add_library(${PROJECT_NAME} ${SOURCES})
+target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
+
+# Executable
+add_executable(${PROJECT_NAME}_exe src/main.cpp)
+target_link_libraries(${PROJECT_NAME}_exe PRIVATE ${PROJECT_NAME})
+set_target_properties(${PROJECT_NAME}_exe PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+
+# Tests
+if(BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
+# Installation
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_exe
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+install(DIRECTORY include/ DESTINATION include)
+
+# CPack packaging
+set(CPACK_PACKAGE_VENDOR "Your Name")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} - ${PROJECT_DESCRIPTION}")
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+
+include(CPack)

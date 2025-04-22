@@ -1,0 +1,241 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Default values
+PROJECT_NAME=""
+PROJECT_PATH=""
+DESCRIPTION="Another C++ project"
+USE_GIT=true
+CMAKE_VERSION="3.14"
+CPP_STANDARD="17"
+
+print_usage() {
+  echo "Usage: $(basename "$0") [OPTIONS] PROJECT_NAME"
+  echo "Create a new C++ project with a professional structure."
+  echo ""
+  echo "Options:"
+  echo "  -h, --help                Display this help message"
+  echo "  -p, --path PATH           Path where to create the project (default: current directory)"
+  echo "  -d, --description DESC    Project description (default: 'Another C++ project')"
+  echo "  --no-git                  Don't initialize a git repository"
+  echo "  --cmake-version VERSION   Set CMake minimum version (default: 3.14)"
+  echo "  --cpp-standard VERSION    Set C++ standard (default: 17)"
+  echo ""
+  echo "Example:"
+  echo "  $(basename "$0") MyProject --path ~/projects --description \"My project\""
+}
+
+while [[ $# -gt 0 ]]; do
+  key="$1"
+  case $key in
+    -h|--help)
+      print_usage
+      exit 0
+      ;;
+    -p|--path)
+      PROJECT_PATH="$2"
+      shift 2
+      ;;
+    -d|--description)
+      DESCRIPTION="$2"
+      shift 2
+      ;;
+    --no-git)
+      USE_GIT=false
+      shift
+      ;;
+    --cmake-version)
+      CMAKE_VERSION="$2"
+      shift 2
+      ;;
+    --cpp-standard)
+      CPP_STANDARD="$2"
+      shift 2
+      ;;
+    -*)
+      echo "Unknown option: $1"
+      print_usage
+      exit 1
+      ;;
+    *)
+      if [ -z "$PROJECT_NAME" ]; then
+        PROJECT_NAME="$1"
+      else
+        echo "Error: PROJECT_NAME already specified as '$PROJECT_NAME'. Unknown argument: $1"
+        print_usage
+        exit 1
+      fi
+      shift
+      ;;
+  esac
+done
+
+if [ -z "$PROJECT_NAME" ]; then
+  echo "Error: PROJECT_NAME is required"
+  print_usage
+  exit 1
+fi
+
+if [ -z "$PROJECT_PATH" ]; then
+  PROJECT_PATH="$(pwd)/$PROJECT_NAME"
+else
+  PROJECT_PATH="$PROJECT_PATH/$PROJECT_NAME"
+fi
+
+if [ -d "$PROJECT_PATH" ]; then
+  echo "Error: Directory '$PROJECT_PATH' already exists"
+  exit 1
+fi
+
+echo "Creating C++ project: $PROJECT_NAME"
+echo "  Path: $PROJECT_PATH"
+echo "  Description: $DESCRIPTION"
+echo "  CMake version: $CMAKE_VERSION"
+echo "  C++ standard: $CPP_STANDARD"
+echo "  Init git: $USE_GIT"
+echo ""
+
+mkdir -p "$PROJECT_PATH"
+cd "$PROJECT_PATH"
+
+mkdir -p src include tests examples docs .vscode
+
+cat > src/main.cpp << EOF
+#include <iostream>
+
+int main(int argc, char *argv[]) {
+    std::cout << "Hello from $PROJECT_NAME!" << std::endl;
+    return 0;
+}
+EOF
+
+cat > include/${PROJECT_NAME}.hpp << EOF
+#pragma once
+
+namespace ${PROJECT_NAME} {
+
+class Example {
+public:
+    Example();
+    ~Example();
+
+    void doSomething();
+
+private:
+    int value_;
+};
+
+} // namespace ${PROJECT_NAME}
+EOF
+
+cat > src/${PROJECT_NAME}.cpp << EOF
+#include "${PROJECT_NAME}.hpp"
+#include <iostream>
+
+namespace ${PROJECT_NAME} {
+
+Example::Example() : value_(42) {}
+
+Example::~Example() {}
+
+void Example::doSomething() {
+    std::cout << "Value: " << value_ << std::endl;
+}
+
+} // namespace ${PROJECT_NAME}
+EOF
+
+cat > tests/CMakeLists.txt << EOF
+find_package(GTest REQUIRED)
+
+# Add test executable
+add_executable(${PROJECT_NAME}_tests
+    test_example.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}_tests
+    PRIVATE
+    ${PROJECT_NAME}
+    GTest::GTest
+    GTest::Main
+)
+
+# Add tests to CTest
+include(GoogleTest)
+gtest_discover_tests(${PROJECT_NAME}_tests)
+EOF
+
+cat > tests/test_example.cpp << EOF
+#include <gtest/gtest.h>
+#include "${PROJECT_NAME}.hpp"
+
+TEST(ExampleTest, BasicTest) {
+    // Basic test
+    EXPECT_EQ(1, 1);
+}
+EOF
+
+TEMPLATE_PATH="$HOME/Templates/cpp/CMakeLists.txt"
+if [ -f "$TEMPLATE_PATH" ]; then
+  cp "$TEMPLATE_PATH" CMakeLists.txt
+  # Replace placeholders
+  sed -i.bak "s/ProjectName/${PROJECT_NAME}/g" CMakeLists.txt
+  sed -i.bak "s/Project Description/${DESCRIPTION}/g" CMakeLists.txt
+  sed -i.bak "s/cmake_minimum_required(VERSION 3.14)/cmake_minimum_required(VERSION ${CMAKE_VERSION})/g" CMakeLists.txt
+  sed -i.bak "s/set(CMAKE_CXX_STANDARD 17)/set(CMAKE_CXX_STANDARD ${CPP_STANDARD})/g" CMakeLists.txt
+  rm CMakeLists.txt.bak
+else
+  echo "Warning: CMake template not found at $TEMPLATE_PATH"
+  # Create basic CMakeLists.txt
+  cat > CMakeLists.txt << EOF
+cmake_minimum_required(VERSION ${CMAKE_VERSION})
+project(
+    ${PROJECT_NAME}
+    VERSION 0.1.0
+    DESCRIPTION "${DESCRIPTION}"
+    LANGUAGES CXX)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD ${CPP_STANDARD})
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Set output directories
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY \${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY \${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY \${CMAKE_BINARY_DIR}/bin)
+
+# Include directories
+include_directories(
+    \${PROJECT_SOURCE_DIR}/include
+)
+
+# Source files
+file(GLOB_RECURSE SOURCES
+    \${PROJECT_SOURCE_DIR}/src/*.cpp
+)
+
+# Executable
+add_executable(\${PROJECT_NAME} \${SOURCES})
+
+# Enable testing
+enable_testing()
+add_subdirectory(tests)
+EOF
+fi
+
+# Use predefined clang-format and clang-tidy
+cp ~/.clang-format .
+cp ~/.clang-tidy .
+
+echo ""
+echo "C++ project '$PROJECT_NAME' created successfully at: $PROJECT_PATH"
+echo ""
+echo "Next steps:"
+echo "  cd $PROJECT_PATH"
+echo "  mkdir build && cd build"
+echo "  cmake .."
+echo "  make"
+echo ""

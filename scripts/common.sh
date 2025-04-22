@@ -36,10 +36,23 @@ fi
 mkdir -p "$VSCODE_CONFIG_DIR"
 link_file "${DOTFILES_DIR}/config/vscode/settings.json" "$VSCODE_CONFIG_DIR/settings.json"
 link_file "${DOTFILES_DIR}/config/vscode/keybindings.json" "$VSCODE_CONFIG_DIR/keybindings.json"
+link_file "${DOTFILES_DIR}/config/vscode/tasks.json" "$VSCODE_CONFIG_DIR/tasks.json"
+link_file "${DOTFILES_DIR}/config/vscode/launch.json" "$VSCODE_CONFIG_DIR/launch.json"
+link_file "${DOTFILES_DIR}/config/vscode/c_cpp_properties.json" "$VSCODE_CONFIG_DIR/c_cpp_properties.json"
 
-# Clang format
-header "Setting up Clang Format"
+# Create snippets directory if it doesn't exist
+VSCODE_SNIPPETS_DIR="$VSCODE_CONFIG_DIR/snippets"
+mkdir -p "$VSCODE_SNIPPETS_DIR"
+link_file "${DOTFILES_DIR}/config/vscode/cpp.code-snippets" "$VSCODE_CONFIG_DIR/cpp.code-snippets"
+
+# C/C++ Configuration
+header "Setting up C/C++ Configuration"
 link_file "${DOTFILES_DIR}/config/clang/.clang-format" "$HOME/.clang-format"
+link_file "${DOTFILES_DIR}/config/clang/.clang-tidy" "$HOME/.clang-tidy"
+
+# Create C++ templates
+mkdir -p "$HOME/Templates/cpp"
+link_file "${DOTFILES_DIR}/config/cpp/CMakeLists.txt.template" "$HOME/Templates/cpp/CMakeLists.txt"
 
 # Bin directory setup
 header "Setting up bin directory"

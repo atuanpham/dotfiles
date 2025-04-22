@@ -1,0 +1,238 @@
+{
+    "Class Declaration": {
+        "prefix": "class",
+        "body": [
+            "class ${1:ClassName} {",
+            "public:",
+            "    ${1:ClassName}();",
+            "    ~${1:ClassName}();",
+            "",
+            "    // Copy operations",
+            "    ${1:ClassName}(const ${1:ClassName}& other);",
+            "    ${1:ClassName}& operator=(const ${1:ClassName}& other);",
+            "",
+            "    // Move operations",
+            "    ${1:ClassName}(${1:ClassName}&& other) noexcept;",
+            "    ${1:ClassName}& operator=(${1:ClassName}&& other) noexcept;",
+            "",
+            "private:",
+            "    $0",
+            "};"
+        ],
+        "description": "C++ class declaration with rule of five"
+    },
+    "Include Guard": {
+        "prefix": "guard",
+        "body": [
+            "#ifndef ${1:${TM_FILENAME_BASE/(.*)/${1:/upcase}_H/}}",
+            "#define ${1:${TM_FILENAME_BASE/(.*)/${1:/upcase}_H/}}",
+            "",
+            "$0",
+            "",
+            "#endif  // ${1:${TM_FILENAME_BASE/(.*)/${1:/upcase}_H/}}"
+        ],
+        "description": "Include guard for header files"
+    },
+    "Pragma Once": {
+        "prefix": "pragma",
+        "body": [
+            "#pragma once",
+            "",
+            "$0"
+        ],
+        "description": "#pragma once include guard"
+    },
+    "Main Function": {
+        "prefix": "main",
+        "body": [
+            "int main(int argc, char* argv[]) {",
+            "    $0",
+            "    return 0;",
+            "}"
+        ],
+        "description": "Main function with arguments"
+    },
+    "For Loop (iterator)": {
+        "prefix": "forit",
+        "body": [
+            "for (auto it = ${1:container}.begin(); it != ${1:container}.end(); ++it) {",
+            "    $0",
+            "}"
+        ],
+        "description": "For loop with iterators"
+    },
+    "For Loop (range-based)": {
+        "prefix": "forr",
+        "body": [
+            "for (const auto& ${1:element} : ${2:container}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Range-based for loop (const)"
+    },
+    "For Loop (range-based, mutable)": {
+        "prefix": "forrm",
+        "body": [
+            "for (auto& ${1:element} : ${2:container}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Range-based for loop (mutable)"
+    },
+    "Try-Catch Block": {
+        "prefix": "try",
+        "body": [
+            "try {",
+            "    $1",
+            "} catch (const std::exception& e) {",
+            "    std::cerr << \"Exception caught: \" << e.what() << std::endl;",
+            "} catch (...) {",
+            "    std::cerr << \"Unknown exception caught\" << std::endl;",
+            "}"
+        ],
+        "description": "Try-catch block with exception handling"
+    },
+    "Smart Pointer (unique)": {
+        "prefix": "uptr",
+        "body": [
+            "std::unique_ptr<${1:Type}> ${2:variable_name} = std::make_unique<${1:Type}>(${3:args});"
+        ],
+        "description": "Create a unique_ptr with make_unique"
+    },
+    "Smart Pointer (shared)": {
+        "prefix": "sptr",
+        "body": [
+            "std::shared_ptr<${1:Type}> ${2:variable_name} = std::make_shared<${1:Type}>(${3:args});"
+        ],
+        "description": "Create a shared_ptr with make_shared"
+    },
+    "Lambda Expression": {
+        "prefix": "lambda",
+        "body": [
+            "auto ${1:func_name} = [${2:capture}](${3:params}) ${4:-> return_type} {",
+            "    $0",
+            "};"
+        ],
+        "description": "Lambda expression with optional return type"
+    },
+    "Function Declaration": {
+        "prefix": "func",
+        "body": [
+            "${1:ReturnType} ${2:functionName}(${3:Parameters});",
+            ""
+        ],
+        "description": "Function declaration"
+    },
+    "Function Definition": {
+        "prefix": "fundef",
+        "body": [
+            "${1:ReturnType} ${2:functionName}(${3:Parameters}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Function definition"
+    },
+    "Struct Declaration": {
+        "prefix": "struct",
+        "body": [
+            "struct ${1:StructName} {",
+            "    $0",
+            "};"
+        ],
+        "description": "Struct declaration"
+    },
+    "Namespace Declaration": {
+        "prefix": "namespace",
+        "body": [
+            "namespace ${1:namespace_name} {",
+            "",
+            "$0",
+            "",
+            "}  // namespace ${1:namespace_name}"
+        ],
+        "description": "Namespace declaration with closing comment"
+    },
+    "Standard Headers": {
+        "prefix": "stdheaders",
+        "body": [
+            "#include <algorithm>",
+            "#include <iostream>",
+            "#include <memory>",
+            "#include <string>",
+            "#include <vector>",
+            "$0"
+        ],
+        "description": "Common standard headers"
+    },
+    "Conditional Compilation": {
+        "prefix": "ifdef",
+        "body": [
+            "#ifdef ${1:MACRO}",
+            "$0",
+            "#else",
+            "",
+            "#endif  // ${1:MACRO}"
+        ],
+        "description": "Conditional compilation with #ifdef"
+    },
+    "Google Test Test Case": {
+        "prefix": "gtest",
+        "body": [
+            "TEST(${1:TestSuite}, ${2:TestName}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Google Test test case"
+    },
+    "Google Test Fixture": {
+        "prefix": "gtestf",
+        "body": [
+            "class ${1:TestFixture} : public ::testing::Test {",
+            "protected:",
+            "    void SetUp() override {",
+            "        $0",
+            "    }",
+            "",
+            "    void TearDown() override {",
+            "        ",
+            "    }",
+            "",
+            "    // Test members",
+            "};"
+        ],
+        "description": "Google Test fixture class"
+    },
+    "Cast (static_cast)": {
+        "prefix": "scast",
+        "body": [
+            "static_cast<${1:target_type}>(${2:expression})"
+        ],
+        "description": "static_cast conversion"
+    },
+    "Cast (dynamic_cast)": {
+        "prefix": "dcast",
+        "body": [
+            "dynamic_cast<${1:target_type}>(${2:expression})"
+        ],
+        "description": "dynamic_cast conversion"
+    },
+    "Constructor Implementation": {
+        "prefix": "ctor",
+        "body": [
+            "${1:ClassName}::${1:ClassName}(${2:parameters}) : ${3:member_initializers} {",
+            "    $0",
+            "}"
+        ],
+        "description": "Constructor implementation with initializer list"
+    },
+    "CMake Source Files": {
+        "prefix": "cmakefiles",
+        "body": [
+            "set(SOURCE_FILES",
+            "    ${1:main.cpp}",
+            "    $0",
+            ")"
+        ],
+        "description": "CMake source files list"
+    }
+}

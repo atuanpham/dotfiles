@@ -16,6 +16,10 @@ brew 'gdb'
 brew 'boost'
 brew 'cppcheck'
 brew 'valgrind'
+brew 'bear'
+brew 'doxygen'
+brew 'conan'
+brew 'make'
 
 # Python development
 brew 'python@3.11'

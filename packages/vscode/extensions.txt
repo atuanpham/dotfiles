@@ -41,3 +41,5 @@ arcticicestudio.nord-visual-studio-code
 
 # Tools
 dorianmassoulier.repomix-runner
+gruntfuggly.todo-tree
+shardulm94.trailing-spaces

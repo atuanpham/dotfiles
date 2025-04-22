@@ -1,124 +1,186 @@
 {
-  // Vim settings
-  "vim.sneak": true,
-  "vim.easymotion": true,
-  "vim.incsearch": true,
-  "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": true,
-  "vim.hlsearch": true,
-  "vim.insertModeKeyBindings": [
-    {
-      "before": [
-        "j",
-        "j"
-      ],
-      "after": [
-        "<Esc>"
-      ]
-    }
-  ],
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": [
-        "<leader>",
-        "d"
-      ],
-      "after": [
-        "d",
-        "d"
-      ]
+    // Vim settings
+    "vim.sneak": true,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "d",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "<C-n>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
     },
-    {
-      "before": [
-        "<C-n>"
-      ],
-      "commands": [
-        ":nohl"
-      ]
-    }
-  ],
-  "vim.leader": "<space>",
-  "vim.handleKeys": {
-    "<C-a>": false,
-    "<C-f>": false
-  },
-  // Editor settings
-  "editor.fontFamily": "Hack Nerd Font Mono, Fira Code, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 12,
-  "editor.lineHeight": 20,
-  "editor.rulers": [
-    88
-  ],
-  "editor.minimap.enabled": false,
-  "editor.renderWhitespace": "boundary",
-  "editor.cursorBlinking": "solid",
-  "workbench.colorTheme": "Nord",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.tree.indent": 20,
-  // Python settings
-  "python.pythonPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
-  "python.defaultInterpreterPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "88"],
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": [
-    "--max-line-length=88",
-    "--disable=C0111"
-  ],
-  "isort.args": ["--profile", "black"],
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  },
-  "[python]": {
+    // Editor settings
+    "editor.fontFamily": "Hack Nerd Font Mono, Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 12,
+    "editor.lineHeight": 20,
+    "editor.rulers": [
+        88
+    ],
+    "editor.minimap.enabled": false,
+    "editor.cursorBlinking": "solid",
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "ms-python.black-formatter"
-  },
-  "python.analysis.extraPaths": [],
-  // Terminal settings
-  "terminal.integrated.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
-  "terminal.integrated.fontSize": 12,
-  // Explorer settings
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-  // Breadcrumbs settings
-  "breadcrumbs.enabled": true,
-  "breadcrumbs.filePath": "last",
-  "breadcrumbs.symbolPath": "off",
-  // C/C++ settings
-  "C_Cpp.formatting": "clangFormat",
-  "[cpp]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools"
-  },
-  "C_Cpp.clang_format_fallbackStyle": "none",
-  "C_Cpp.clang_format_style": "file:${HOME}/dotfiles/.clang-format",
-  // Other settings
-  "files.autoSave": "onFocusChange",
-  "window.zoomLevel": 0,
-  "editor.fontVariations": false,
-  "terminal.integrated.inheritEnv": false,
-  "cmake.showOptionsMovedNotification": false,
-  "autoDocstring.startOnNewLine": true,
-  "[yaml]": {
-    "editor.indentSize": "tabSize",
-    "editor.insertSpaces": true,
+    "editor.formatOnType": true,
+    "editor.suggestSelection": "first",
     "editor.tabSize": 4,
-    "editor.autoIndent": "advanced",
-    "diffEditor.ignoreTrimWhitespace": false
-  },
-  "makefile.configureOnOpen": true,
-  "notebook.lineNumbers": "on",
-  "files.exclude": {
-    "**/__pycache__": true
-  },
-  "workbench.startupEditor": "none",
-  "repomix.ignore.customPatterns": [
-    "Brewfile.lock.json",
-    "LICENSE",
-    "README.md"
-  ],
-  "[ruby]": {
-    
-    "editor.defaultColorDecorators": "never"
-  }
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.maxColumn": 100,
+    "editor.fontLigatures": true,
+    "workbench.colorTheme": "Nord",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.tree.indent": 20,
+    // Python settings
+    "python.pythonPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
+    "python.defaultInterpreterPath": "/opt/homebrew/Caskroom/miniconda/base/bin/python",
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "88"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--max-line-length=88",
+        "--disable=C0111"
+    ],
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.analysis.extraPaths": [],
+    // Terminal settings
+    "terminal.integrated.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.defaultProfile.osx": "bash",
+    // Explorer settings
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    // Breadcrumbs settings
+    "breadcrumbs.enabled": true,
+    "breadcrumbs.filePath": "last",
+    "breadcrumbs.symbolPath": "off",
+    // C/C++ settings
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.autocomplete": "default",
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "/usr/include",
+        "/usr/local/include"
+    ],
+    "C_Cpp.enhancedColorization": "enabled",
+    "C_Cpp.suggestSnippets": true,
+    "C_Cpp.loggingLevel": "Warning",
+    "C_Cpp.clang_format_style": "file",
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    "C_Cpp.vcFormat.indent.preserveComments": true,
+    "C_Cpp.vcFormat.indent.namespaceContents": true,
+    "C_Cpp.vcFormat.space.beforeComma": false,
+    "C_Cpp.vcFormat.space.afterComma": true,
+    "C_Cpp.vcFormat.space.removeAroundMemberOperators": false,
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true,
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    // File associations
+    "files.associations": {
+        "*.h": "cpp",
+        "*.hpp": "cpp",
+        "*.c": "c",
+        "*.cpp": "cpp",
+        "*.cc": "cpp",
+        "Makefile*": "makefile"
+    },
+    // Git settings
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    // Other settings
+    "files.autoSave": "onFocusChange",
+    "window.zoomLevel": 0,
+    "editor.fontVariations": false,
+    "terminal.integrated.inheritEnv": false,
+    "cmake.showOptionsMovedNotification": false,
+    "autoDocstring.startOnNewLine": true,
+    "[yaml]": {
+        "editor.indentSize": "tabSize",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.autoIndent": "advanced",
+        "diffEditor.ignoreTrimWhitespace": false
+    },
+    "makefile.configureOnOpen": true,
+    "notebook.lineNumbers": "on",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/node_modules": true,
+        "**/*.o": true,
+        "**/*.obj": true,
+        "**/*.ilk": true,
+        "**/*.pdb": true
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.eol": "\n",
+    "workbench.startupEditor": "none"
 }

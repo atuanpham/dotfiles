@@ -23,8 +23,18 @@ fi
 
 # Git configuration
 header "Setting up Git configuration"
-link_file "${DOTFILES_DIR}/config/git/gitconfig" "$HOME/.gitconfig"
-link_file "${DOTFILES_DIR}/config/git/gitignore_global" "$HOME/.gitignore_global"
+link_file "${DOTFILES_DIR}/config/git/gitconfig.local" "$HOME/.gitconfig.local"
+
+if [[ ! -f "$HOME/.gitconfig" ]] || ! grep -q "path = ~/.gitconfig.local" "$HOME/.gitconfig"; then
+    info "Creating main .gitconfig with include directive"
+    cat > "$HOME/.gitconfig" << EOF
+[include]
+    path = ~/.gitconfig.local
+EOF
+    success "Created ~/.gitconfig with include directive"
+else
+    info "Main .gitconfig with include directive already exists"
+fi
 
 # VS Code configuration
 header "Setting up VS Code configuration"

@@ -50,9 +50,11 @@ files=(
     "$HOME/.bash/prompt"
     "$HOME/.bash/exports"
     "$HOME/.bash/functions"
-    "$HOME/.gitconfig"
+    "$HOME/.gitconfig.local"
     "$HOME/.gitignore_global"
     "$HOME/.clang-format"
+    "$HOME/.clang-tidy"
+    "$HOME/Templates/cpp/CMakeLists.txt"
 )
 
 # VS Code config paths
@@ -64,6 +66,10 @@ fi
 
 files+=("$VSCODE_CONFIG_DIR/settings.json")
 files+=("$VSCODE_CONFIG_DIR/keybindings.json")
+files+=("$VSCODE_CONFIG_DIR/tasks.json")
+files+=("$VSCODE_CONFIG_DIR/launch.json")
+files+=("$VSCODE_CONFIG_DIR/c_cpp_properties.json")
+files+=("$VSCODE_CONFIG_DIR/cpp.code-snippets")
 
 # Remove symlinks
 for file in "${files[@]}"; do
@@ -73,6 +79,18 @@ for file in "${files[@]}"; do
         success "Removed symlink: $file"
     fi
 done
+
+# Handle .gitconfig specially
+if [[ -f "$HOME/.gitconfig" ]]; then
+    info "Checking .gitconfig file"
+    if grep -q "path = ~/.gitconfig.local" "$HOME/.gitconfig"; then
+        info "Removing .gitconfig file with include directive"
+        rm "$HOME/.gitconfig"
+        success "Removed .gitconfig file"
+    else
+        info "Keeping .gitconfig as it appears to be customized"
+    fi
+fi
 
 # Remove source line from .bash_profile
 if grep -q 'source "$HOME/.bashrc"' "$HOME/.bash_profile"; then
@@ -85,13 +103,13 @@ fi
 # Restore backups if requested
 if [[ "$RESTORE_BACKUPS" == "true" ]]; then
     header "Restoring backups"
-    
+
     # Find the most recent backup directory
     backup_dir=$(find "$HOME/.dotfiles_backup" -maxdepth 1 -type d | sort -r | head -n 1)
-    
+
     if [[ -d "$backup_dir" ]]; then
         info "Restoring from backup: $backup_dir"
-        
+
         # Restore each backed up file
         for file in "$backup_dir"/*; do
             if [[ -f "$file" ]]; then
@@ -111,7 +129,7 @@ if [[ "$REMOVE_PACKAGES" == "true" ]]; then
     header "Warning: Removing packages"
     warning "This will attempt to uninstall all packages installed by the dotfiles setup"
     warning "This action cannot be undone and may break your system"
-    
+
     # Ask for confirmation
     read -p "Are you sure you want to continue? (y/N) " -n 1 -r
     echo

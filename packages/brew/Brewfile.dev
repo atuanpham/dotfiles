@@ -20,6 +20,7 @@ brew 'bear'
 brew 'doxygen'
 brew 'conan'
 brew 'make'
+brew 'googletest'
 
 # Python development
 brew 'python@3.11'

@@ -72,12 +72,21 @@ if [[ "$SKIP_PACKAGES" == "false" ]]; then
 fi
 
 # Set up LLVM and GCC paths
-if grep -qv "LLVM paths" "$HOME/.bash_profile"; then
+if ! grep -q "LLVM paths" "$HOME/.bash_profile"; then
     header "Setting up LLVM and GCC paths"
     echo -e "\n# LLVM paths" >> "$HOME/.bash_profile"
-    echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> "$HOME/.bash_profile"
-    echo 'export LDFLAGS="-L/usr/local/opt/llvm/lib"' >> "$HOME/.bash_profile"
-    echo 'export CPPFLAGS="-I/usr/local/opt/llvm/include"' >> "$HOME/.bash_profile"
+
+    # Check if we're on Apple Silicon
+    if [[ "$(uname -m)" == "arm64" ]]; then
+        echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> "$HOME/.bash_profile"
+        echo 'export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"' >> "$HOME/.bash_profile"
+        echo 'export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"' >> "$HOME/.bash_profile"
+    else
+        echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> "$HOME/.bash_profile"
+        echo 'export LDFLAGS="-L/usr/local/opt/llvm/lib"' >> "$HOME/.bash_profile"
+        echo 'export CPPFLAGS="-I/usr/local/opt/llvm/include"' >> "$HOME/.bash_profile"
+    fi
+
     success "LLVM paths configured"
 else
     info "LLVM paths already configured"

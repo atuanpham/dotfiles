@@ -1,6 +1,7 @@
 # Core tools and utilities
 brew 'coreutils'
 brew 'git'
+brew 'pre-commit'
 brew 'the_silver_searcher'
 brew 'curl'
 brew 'wget'

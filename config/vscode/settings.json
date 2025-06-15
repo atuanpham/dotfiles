@@ -77,10 +77,7 @@
     ],
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-    "python.linting.pylintArgs": [
-        "--max-line-length=100",
-        "--disable=C0111"
-    ],
+    "pylint.args": ["--disable=W1203,C0111,C0114,C0116", "--max-line-length=120"],
     "isort.args": [
         "--profile",
         "black"

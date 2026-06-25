@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Make vim the default editor
-export EDITOR='vim'
+# Make nvim the default editor
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # Add user bin directory to path
 export PATH="$HOME/bin:$PATH"
@@ -36,3 +37,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Set DOTFILES_DIR environment variable
 export DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+
+# VCPKG
+export VCPKG_ROOT="$HOME/.local/vcpkg"
+export PATH=$VCPKG_ROOT:$PATH

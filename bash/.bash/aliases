@@ -2,7 +2,7 @@
 
 # Vim
 # Uncomment to use neovim instead of vim
-# alias vim='nvim'
+alias vim='nvim'
 
 # Search
 alias ag='ag --hidden --path-to-agignore=~/.agignore'
@@ -26,8 +26,10 @@ alias la='ls -lha --color=auto --group-directories-first'
 alias tarc='tar -zcvf'
 alias tarx='tar -zxvf'
 
-# Use Podman instead of Docker
-alias docker='podman'
+# Tmux
+alias ta='tmux attach -t'
+alias tl='tmux ls'
+alias tn='tmux new -s'
 
 # Git shortcuts
 alias g='git'

@@ -30,45 +30,8 @@ fi
 if [[ "$SKIP_PACKAGES" == "false" ]]; then
     header "Installing packages"
 
-    # Install core packages
-    info "Installing core packages"
-    run_command "brew bundle --file=${DOTFILES_DIR}/packages/brew/Brewfile.base"
-
-    # Install development packages
-    info "Installing development packages"
-    run_command "brew bundle --file=${DOTFILES_DIR}/packages/brew/Brewfile.dev"
-
-    # Install GUI applications
-    info "Installing applications"
-    run_command "brew bundle --file=${DOTFILES_DIR}/packages/brew/Brewfile.apps"
-
-    # Install VSCode extensions
-    if command_exists code; then
-        header "Installing VSCode extensions"
-
-        # Get list of currently installed extensions
-        installed_extensions=$(code --list-extensions)
-
-        # Install extensions
-        while IFS= read -r extension || [[ -n "$extension" ]]; do
-            # Skip comments and empty lines
-            [[ "$extension" =~ ^#.* || -z "$extension" ]] && continue
-            info "Installing VS Code extension: $extension"
-            run_command "code --install-extension $extension" "Failed to install extension: $extension"
-        done < "${DOTFILES_DIR}/packages/vscode/extensions.txt"
-
-        header "Cleaning up unused VSCode extensions"
-        extensions_to_keep=$(grep -v "^#" "${DOTFILES_DIR}/packages/vscode/extensions.txt" | grep -v "^$")
-
-        for ext in $installed_extensions; do
-            if ! echo "$extensions_to_keep" | grep -q "$ext"; then
-                info "Removing extension not in extensions.txt: $ext"
-                run_command "code --uninstall-extension $ext" "Failed to uninstall extension: $ext"
-            fi
-        done
-    else
-        warning "VS Code not found, skipping extension installation"
-    fi
+    info "Installing packages from Brewfile"
+    run_command "brew bundle --file=${DOTFILES_DIR}/packages/brew/Brewfile"
 fi
 
 # Set up LLVM and GCC paths
@@ -92,22 +55,11 @@ else
     info "LLVM paths already configured"
 fi
 
-# Configure Conda
-if ! command_exists conda; then
-    error "Conda has not been installed!"
-    return 1
-fi
-
-if ! grep -q "conda initialize" "$HOME/.bash_profile"; then
-    header "Setting up Conda"
-    conda init bash
-    source "$HOME/.bash_profile"
-
-    # Install Python packages
-    info "Installing Python packages"
-    conda activate base
-    conda install -c conda-forge black isort pylint mypy -y
-    success "Conda configured"
+# Bootstrap TPM
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    header "Setting up Tmux Plugin Manager"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    success "TPM installed"
 else
-    info "Conda already configured"
+    info "TPM already installed"
 fi

@@ -1,0 +1,64 @@
+# Core tools and utilities
+brew 'coreutils'
+brew 'git'
+brew 'pre-commit'
+brew 'the_silver_searcher'
+brew 'curl'
+brew 'wget'
+brew 'htop'
+brew 'jq'
+brew 'fd'
+brew 'openssh'
+brew 'openssl'
+brew 'vim'
+brew 'neovim'
+brew 'tmux'
+brew 'stow'
+brew 'ripgrep'
+brew 'ssh-copy-id'
+brew 'mas'  # Mac App Store CLI
+
+# Development tools
+
+# Container tools
+brew 'podman'
+
+# Build tools
+brew 'cmake'
+brew 'ninja'
+brew 'ccache'
+
+# C/C++ development
+brew 'clang-format'
+brew 'llvm'
+brew 'gcc'
+brew 'gdb'
+brew 'boost'
+brew 'cppcheck'
+brew 'bear'
+brew 'doxygen'
+brew 'conan'
+brew 'make'
+brew 'googletest'
+
+# Python development
+brew 'python@3.11'
+brew 'pipx'
+brew 'libomp'
+brew 'uv'
+
+# JavaScript/Node.js development
+brew 'node'
+
+# GUI Applications and fonts
+
+# Applications
+cask 'iterm2'
+cask 'postman'
+cask 'podman-desktop'
+
+# Fonts
+cask 'font-fira-code'
+cask 'font-hack-nerd-font'
+cask 'font-source-code-pro'
+cask 'font-jetbrains-mono-nerd-font'

@@ -1,0 +1,37 @@
+# Base
+git
+curl
+wget
+htop
+jq
+fd-find
+silversearcher-ag
+openssh-client
+stow
+unzip
+fontconfig
+
+# Dev
+build-essential
+cmake
+ninja-build
+ccache
+clang
+clang-format
+clang-tidy
+gcc
+gdb
+cppcheck
+valgrind
+doxygen
+python3
+python3-pip
+python3-venv
+nodejs
+npm
+
+# Editor/terminal
+neovim
+tmux
+ripgrep
+xclip

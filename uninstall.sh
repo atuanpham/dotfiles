@@ -39,9 +39,35 @@ header "Uninstalling dotfiles"
 
 info "Removing stow symlinks"
 cd "${DOTFILES_DIR}"
-stow -D bash git nvim tmux clang bin cpp-templates
+stow -D bash git nvim tmux clang bin cpp-templates kanata
 cd - >/dev/null
 success "Removed stow symlinks"
+
+# Stop and disable Kanata service
+info "Removing Kanata service"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if systemctl --user is-enabled kanata.service &>/dev/null; then
+        systemctl --user stop kanata.service 2>/dev/null
+        systemctl --user disable kanata.service 2>/dev/null
+        rm -f "${HOME}/.config/systemd/user/kanata.service"
+        systemctl --user daemon-reload
+        success "Kanata systemd service removed"
+    fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    KANATA_PLIST="/Library/LaunchDaemons/com.jtroo.kanata.plist"
+    if [[ -f "$KANATA_PLIST" ]]; then
+        sudo launchctl bootout system/com.jtroo.kanata 2>/dev/null
+        sudo rm -f "$KANATA_PLIST"
+        success "Kanata LaunchDaemon removed"
+    fi
+
+    KARABINER_PLIST="/Library/LaunchDaemons/org.pqrs.Karabiner-VirtualHIDDevice-Daemon.plist"
+    if [[ -f "$KARABINER_PLIST" ]]; then
+        sudo launchctl bootout system/org.pqrs.Karabiner-VirtualHIDDevice-Daemon 2>/dev/null
+        sudo rm -f "$KARABINER_PLIST"
+        success "Karabiner VHIDDevice Daemon removed"
+    fi
+fi
 
 # Handle .gitconfig specially
 if [[ -f "$HOME/.gitconfig" ]]; then

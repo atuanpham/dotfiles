@@ -74,4 +74,56 @@ else
     success "NVM installed"
 fi
 
+header "Installing Kanata"
+KANATA_BIN="${HOME}/.local/bin/kanata"
+if [[ -f "$KANATA_BIN" ]]; then
+    info "Kanata already installed at $KANATA_BIN"
+else
+    info "Downloading Kanata from GitHub releases..."
+    mkdir -p "${HOME}/.local/bin"
+    TMP_DIR=$(mktemp -d)
+
+    if curl -fsSL "https://github.com/jtroo/kanata/releases/latest/download/linux-binaries-x64.zip" \
+        -o "${TMP_DIR}/kanata.zip"; then
+        unzip -q "${TMP_DIR}/kanata.zip" -d "${TMP_DIR}"
+        cp "${TMP_DIR}/kanata" "$KANATA_BIN"
+        chmod +x "$KANATA_BIN"
+        success "Kanata installed to $KANATA_BIN"
+    else
+        error "Failed to download Kanata"
+    fi
+
+    rm -rf "$TMP_DIR"
+fi
+
+header "Setting up Kanata permissions"
+
+# udev rule for uinput access
+UDEV_RULE="/etc/udev/rules.d/99-kanata.rules"
+if [[ -f "$UDEV_RULE" ]]; then
+    info "Kanata udev rule already exists"
+else
+    sudo tee "$UDEV_RULE" > /dev/null << 'UDEV_EOF'
+KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+UDEV_EOF
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
+    success "Kanata udev rule created"
+fi
+
+# Ensure uinput module loads at boot
+if [[ ! -f /etc/modules-load.d/kanata.conf ]]; then
+    echo "uinput" | sudo tee /etc/modules-load.d/kanata.conf > /dev/null
+    sudo modprobe uinput
+    success "uinput module configured to load at boot"
+fi
+
+# Add user to input group
+if groups "$USER" | grep -q '\binput\b'; then
+    info "User already in input group"
+else
+    sudo usermod -aG input "$USER"
+    warning "Added $USER to input group -- re-login required for group change to take effect"
+fi
+
 success "Ubuntu setup complete!"

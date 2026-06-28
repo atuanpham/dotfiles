@@ -1,0 +1,13 @@
+(defsrc
+  esc
+  caps
+)
+
+(deflayer default
+  grv
+  @cap
+)
+
+(defalias
+  cap (fork esc caps (lsft rsft))
+)

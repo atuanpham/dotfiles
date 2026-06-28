@@ -34,6 +34,33 @@ if [[ "$SKIP_PACKAGES" == "false" ]]; then
     run_command "brew bundle --file=${DOTFILES_DIR}/packages/brew/Brewfile"
 fi
 
+header "Installing Karabiner DriverKit VirtualHIDDevice"
+if [[ -d "/Applications/.Karabiner-VirtualHIDDevice-Manager.app" ]]; then
+    info "Karabiner DriverKit VirtualHIDDevice already installed"
+else
+    KARABINER_DRIVER_VERSION="6.2.0"
+    KARABINER_PKG="Karabiner-DriverKit-VirtualHIDDevice-${KARABINER_DRIVER_VERSION}.pkg"
+    KARABINER_URL="https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/releases/download/v${KARABINER_DRIVER_VERSION}/${KARABINER_PKG}"
+
+    TMP_DIR=$(mktemp -d)
+    info "Downloading Karabiner DriverKit v${KARABINER_DRIVER_VERSION}..."
+    if curl -fsSL "$KARABINER_URL" -o "${TMP_DIR}/${KARABINER_PKG}"; then
+        sudo installer -pkg "${TMP_DIR}/${KARABINER_PKG}" -target /
+        success "Karabiner DriverKit VirtualHIDDevice installed"
+    else
+        error "Failed to download Karabiner DriverKit"
+    fi
+    rm -rf "$TMP_DIR"
+fi
+
+# Activate the driver extension
+if [[ -f "/Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager" ]]; then
+    info "Activating Karabiner DriverKit extension..."
+    '/Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager' activate
+    success "Karabiner DriverKit extension activation requested"
+    warning "You must approve the driver in System Settings > General > Login Items & Extensions > Driver Extensions"
+fi
+
 # Set up LLVM and GCC paths
 if ! grep -q "LLVM paths" "$HOME/.bash_profile"; then
     header "Setting up LLVM and GCC paths"

@@ -86,7 +86,7 @@ else
     if curl -fsSL "https://github.com/jtroo/kanata/releases/latest/download/linux-binaries-x64.zip" \
         -o "${TMP_DIR}/kanata.zip"; then
         unzip -q "${TMP_DIR}/kanata.zip" -d "${TMP_DIR}"
-        cp "${TMP_DIR}/kanata" "$KANATA_BIN"
+        cp "${TMP_DIR}/kanata_linux_x64" "$KANATA_BIN"
         chmod +x "$KANATA_BIN"
         success "Kanata installed to $KANATA_BIN"
     else
